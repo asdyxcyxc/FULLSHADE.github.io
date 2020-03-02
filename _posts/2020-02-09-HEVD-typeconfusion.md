@@ -1,8 +1,6 @@
 ---
-layout: post
-title: HEVD - Windows 7 x86 Kernel Type Confusion
-date: 2020-02-09
-tags: malware
+layout: single
+title: Windows 7 x86 Kernel Type Confusion
 ---
 
 Walkthrough for the HEVD Windows Kernel Driver exploitation, exploiting a Kernel level Type Confusion bug vulnerability.
