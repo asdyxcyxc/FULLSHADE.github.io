@@ -1,6 +1,7 @@
 ---
 layout: single
 title: Writing a Windows Kernel-Mode Driver - Part 1
+toc: true
 ---
 
 Introduction to writing Windows kernel-mode drivers in the C programming language. This post covers settign up the kernel development enviroment and the basics to get your first kernel driver deployed.
