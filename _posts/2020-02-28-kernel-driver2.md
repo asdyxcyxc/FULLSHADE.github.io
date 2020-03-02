@@ -3,8 +3,6 @@ layout: single
 title: Writing a Windows Kernel-Mode Driver - Part 2
 ---
 
-## Writing a Windows Kernel-Mode Driver - Part 2
-
 ----
 
 **Introduction**
