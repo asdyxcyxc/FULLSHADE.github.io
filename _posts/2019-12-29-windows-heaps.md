@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows Internals | Understanding Windows Heaps & Manager
+title: Windows Internals - Understanding Windows Heaps & Manager
 date: 2019-12-29
 categories: Blog post
 ---
