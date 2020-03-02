@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HEVD | Windows 7 x86 Kernel Type Confusion
+title: HEVD - Windows 7 x86 Kernel Type Confusion
 date: 2020-02-09
 tags: malware
 ---
