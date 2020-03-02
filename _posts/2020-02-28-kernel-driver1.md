@@ -5,10 +5,6 @@ title: Writing a Windows Kernel-Mode Driver - Part 1
 
 Introduction to writing Windows kernel-mode drivers in the C programming language. This post covers settign up the kernel development enviroment and the basics to get your first kernel driver deployed.
 
-## Windows Kernel-Mode Driver development - Part 1
-
-----
-
 **Introduction**
 
 Windows development can be seen as a difficult task, thus making Kernel-mode driver development an even more difficult task to conduct. To learn proper Windows kernel exploit development, understanding the underlying properties and internals of Windows and especially windows kernel drivers is crucial. This mini-series will give insight to Windows kernel driver development and this series will hopefully give light to some of the more complicated aspects of Windows internals as a whole.
