@@ -1,7 +1,6 @@
 ---
-layout: post
+layout: single
 title: HEVD | Windows 7 x86 Kernel Type Confusion
-date: 2020-2-9
 tags: HEVD, kernel exploitation
 ---
 
