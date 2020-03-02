@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HEVD | Windows 7 x86 Kernel Stack Overflow
+title: HEVD - Windows 7 x86 Kernel Stack Overflow
 date: 2020-2-4
 tags: HEVD
 ---
