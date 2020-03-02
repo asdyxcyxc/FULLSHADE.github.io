@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HEVD | Windows 7 x86 Kernel NULL Pointer Dereference
+title: HEVD - Windows 7 x86 Kernel NULL Pointer Dereference
 date: 2020-2-8
 tags: HEVD
 ---
