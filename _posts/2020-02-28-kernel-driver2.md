@@ -1,8 +1,6 @@
 ---
-layout: post
+layout: single
 title: Writing a Windows Kernel-Mode Driver - Part 2
-date: 2020-02-28
-categories: windows kernel driver
 ---
 
 ## Writing a Windows Kernel-Mode Driver - Part 2
