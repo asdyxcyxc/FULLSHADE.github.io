@@ -5,11 +5,7 @@ date: 2020-02-09
 tags: malware
 ---
 
-----
-
 Walkthrough for the HEVD Windows Kernel Driver exploitation, exploiting a Kernel level Type Confusion bug vulnerability.
-
-### Exploit development = Windows 7 x86 Kernel Type Confusion
 
 ----
 
