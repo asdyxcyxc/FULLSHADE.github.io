@@ -192,7 +192,9 @@ pop     ebp
 retn    8
 _DriverEntry@8 endp
 ```
+
 *Unload*
+
 
 ```asm
 ; void __stdcall Unload(_DRIVER_OBJECT *DriverObject)
