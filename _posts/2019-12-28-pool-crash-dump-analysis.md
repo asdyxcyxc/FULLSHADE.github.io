@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows Internals | Advanced Windows pool corruption crash analysis 
+title: Windows Internals - Advanced Windows pool corruption crash analysis 
 date: 2019-12-28
 categories: Blog post
 ---
