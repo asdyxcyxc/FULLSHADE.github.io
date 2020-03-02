@@ -7,16 +7,6 @@ tags: HEVD
 
 Walkthrough for the HEVD Windows Kernel Driver exploitation, exploiting a Stack-based vulnerability.
 
-### HEVD | Windows 7 x86 Kernel Stack Overflow
-
-#### Author: FULLSHADE
-
-----
-
-Long overdue post.
-
-**Introduction to HEVD**
-
 HEVD (HackSys Extreme Vulnerable Driver) is the Vulnserver of Kernel Land, it's a Windows kernel driver that is prone to various types of vulnerabilities, everything from basic Stack-overflows and UAF vulnerabilities, to Pool-overflows. HEVD is the de-facto standard for anyone who is looking to pursue the Offsec OSEE certification or for any security/vulnerability researcher who wants to learn kernel exploitation and kernel debugging. 
 
 - [https://github.com/hacksysteam/HackSysExtremeVulnerableDriver](https://github.com/hacksysteam/HackSysExtremeVulnerableDriver)
