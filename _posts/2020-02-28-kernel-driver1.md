@@ -5,7 +5,9 @@ date: 2020-02-28
 categories: windows kernel driver
 ---
 
-## Windows Kernel-Mode Driver in C development
+Introduction to writing Windows kernel-mode drivers in the C programming language. This post covers settign up the kernel development enviroment and the basics to get your first kernel driver deployed.
+
+## Windows Kernel-Mode Driver development - Part 1
 
 ----
 
