@@ -1,8 +1,6 @@
 ---
-layout: post
+layout: single
 title: HEVD - Windows 7 x86 Kernel Stack Overflow
-date: 2020-2-4
-tags: HEVD
 ---
 
 Walkthrough for the HEVD Windows Kernel Driver exploitation, exploiting a Stack-based vulnerability.
