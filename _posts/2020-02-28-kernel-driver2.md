@@ -5,7 +5,7 @@ date: 2020-02-28
 categories: windows kernel driver
 ---
 
-## Windows Kernel-Mode Driver in C development
+## Writing a Windows Kernel-Mode Driver - Part 2
 
 ----
 
