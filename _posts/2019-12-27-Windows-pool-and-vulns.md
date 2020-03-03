@@ -1,15 +1,9 @@
 ---
-layout: post
+layout: single
 title: Windows Kernel memory pool & vulnerabilities
-date: 2019-12-27
-tags: windows internals 
 ---
 
 This article gives insight into what the Windows Kernel pool is, and what are some vulnerabilities that reside inside the pool area. Also, this article will show and explain the analysis of a Windows pool overflow crash via WinDBG.
-
-### Windows Internals | Windows Kernel memory pool & vulnerabilities
-
-#### Author: FULLSHADE
 
 ----
 
