@@ -3,8 +3,6 @@ layout: post
 title: Windows CryptoAPI and digital certificate analysis
 ---
 
-**Introduction** 
-
 This post aims to give a better understanding of how Microsofts CryptoAPI functions as a means of providing security to the system, this post will also have focus on Windows digital certificates and some of the security issues and flaws that today's researchers have found.
 
 Windows utilizes the Microsoft CryptoAPI (which is apart of the Win32 API), which enables developers to have the ability to add cryptography-based security to their applications. Secure communications over nonsecure networks involve the three main areas of concern, "privacy, authentication, and integrity", The Microsoft CryptoAPI is a set of functions and tools which can be used to improve the various areas of concern. Previously Microsoft it was available as the "CryptoAPI SDK" in the early days of Windows. The CryptoAPI acts as a layer between the user and the complex algorithms that are used for protecting data. An application will make calls to various special functions that are known as Cryptographic Service Providers (CSPs), and these are the modules that do all of the encryption/decryption work.
