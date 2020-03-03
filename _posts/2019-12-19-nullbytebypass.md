@@ -1,8 +1,6 @@
 ---
-layout: post
+layout: single
 title: Null byte POP POP RET DLL injection bypass technique
-date:   2019-12-19
-tags: whitepaper
 ---
 
 A new technique for bypassing null byte ridden POP POP RET sequences while exploiting local SEH overflows via DLL injection.
