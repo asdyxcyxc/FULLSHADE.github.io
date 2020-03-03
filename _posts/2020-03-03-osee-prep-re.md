@@ -1,0 +1,40 @@
+---
+layout: single
+title: OSEE Certification preperation - resources
+---
+
+This post aims to act as a resource and guide for those who wish to obtain their OSEE certification. Fair warning, I, the author have not yet obtained my OSEE certification, the following resources are what I am *using* to study for OSEE. Like always, reading various OSEE review posts is probably your best bet if you want to get a better understanding of OSEE, but these are the tools and resources I have used and been using for over the last few months in my kernel exploitation and research time.
+
+**Set up a kernel debugging envrioment with Virtualbox**
+
+- Check out on of my previous blog posts for setting up your kernel debugging envrioment [here]()
+
+**IOCTL Discovery**
+
+- First research Windows internals I/O, on of my blog posts [here]()
+- IOCTL decoder tool [OSR Online](https://www.osronline.com/article.cfm%5Earticle=229.htm)
+- IDA Pro plugin for IOCTL discovery [win_driver_plugin](https://github.com/FSecureLABS/win_driver_plugin)
+
+**IOCTL Fuzzing**
+
+- IOCTLbf - https://github.com/koutto/ioctlbf
+- kDriver-Fuzzer - https://github.com/k0keoyo/kDriver-Fuzzer
+
+**IRP system monitoring**
+
+- IRPMon - https://github.com/MartinDrab/IRPMon
+- OSR IrpTracker - https://www.osronline.com/article.cfm%5Earticle=199.htm
+
+**Exploitation practice**
+
+- The "Vulnserver for kernel exploitation" - HEVD - [HackSysExtremeVulnerableDriver](https://github.com/hacksysteam/HackSysExtremeVulnerableDriver)
+-
+-
+
+
+**Books on Windows & kernel programming**
+
+- [Windows Kernel Programming](https://www.amazon.com/Windows-Kernel-Programming-Pavel-Yosifovich/dp/1977593372/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1583268012&sr=1-3) (Pavel Yosifovich)
+- [Windows Internals, Part 1](https://www.amazon.com/Windows-Internals-Part-architecture-management/dp/0735684189/ref=sr_1_1?keywords=windows+internals&qid=1583268109&s=books&sr=1-1) (Pavel Yosifovich)
+- [Windows Internals, Part 2](https://www.amazon.com/Windows-Internals-Part-2-7th/dp/0135462401/ref=sr_1_2?keywords=windows+internals&qid=1583268109&s=books&sr=1-2) (Pavel Yosifovich)
+- [A Guide to Kernel Exploitation: Attacking the Core](https://www.amazon.com/Guide-Kernel-Exploitation-Attacking-Core/dp/1597494860/ref=sr_1_1?keywords=kernel+exploitation&qid=1583268183&s=books&sr=1-1)
