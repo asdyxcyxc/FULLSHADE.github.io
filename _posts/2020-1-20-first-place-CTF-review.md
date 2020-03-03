@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Winning my first CTF, 1st place in CMD+CTRL CTF
 ---
 
