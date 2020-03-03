@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Windows Kernel-mode driver I/O request lifecycle
 ---
 
