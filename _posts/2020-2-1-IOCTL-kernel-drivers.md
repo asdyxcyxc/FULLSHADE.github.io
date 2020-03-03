@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: IOCTL's for kernel driver exploit development
 ---
 
