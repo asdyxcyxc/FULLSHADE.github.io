@@ -3,8 +3,6 @@ layout: post
 title: Understanding Windows memory data structures
 ---
 
-**Introduction**
-
 These are a few of the commonly referred to Windows memory management data structures that you'll commonly encounter when performing some aspect of Windows debugging, kernel debugging, or Windows exploit development. The following Windows memory data structures are crucial to understanding if you truly want to exceed at being a security researcher or exploit developer. 
 
 ----
