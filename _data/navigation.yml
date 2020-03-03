@@ -3,8 +3,8 @@ main:
   - title: "Posts"
     url: /posts.html
     
-  - title: "Categories"
-    url: /categories.html
+  - title: "Malware Reports"
+    url: /malware-analysis.html
 
   - title: "About"
     url: /about.html
