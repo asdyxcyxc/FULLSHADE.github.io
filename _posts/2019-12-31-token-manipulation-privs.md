@@ -3,8 +3,6 @@ layout: post
 title: Kernel Opaque data structures & access tokens
 ---
 
-**Introduction**
-
 Within the world of exploit development, a common technique to gain access on another higher level is through the process of process token theft which leads to an escalation of privileges attack (EOP).
 
 This article aims to cover what access tokens are and how a process uses and stores them, and what security concern one will face when dealing with process access tokens. In the second half of this article, we will cover manual analysis of access tokens through WinDBG, and also demonstrate a manual EOP attack using tokens, and to conclude token theft attacks, we will look at some commonly used and abused access token stealing shellcode payloads that attackers commonly use during exploit development as a means to gain higher privileges.
