@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Windows CryptoAPI and digital certificate analysis
 ---
 
