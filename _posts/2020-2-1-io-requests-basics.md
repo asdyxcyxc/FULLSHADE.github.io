@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Basics of Kernel-mode driver (IRPs) & I/O requests 
 ---
 
