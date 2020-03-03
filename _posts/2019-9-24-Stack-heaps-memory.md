@@ -1,15 +1,7 @@
 ---
 layout: post
 title: Understanding Windows memory data structures
-date: 2019-9-24
-categories: Blog post
 ---
-
-### Windows Internals | Understanding Windows memory data structures
-
-#### Author: FULLSHADE
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FFULLSHADE%2FFULLSHADE.github.io%2Fmaster%2F_posts%2F2019-9-24-Stack-heaps-memory.md)
-----
 
 **Introduction**
 
