@@ -20,6 +20,8 @@ Certifications
 - eLearnSecurity Junior Penetration Tester (eJPT)
 - CompTIA Security+
 
+![sec](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/images/sse.png)
+
 CVEs
 ---
 
