@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Kernel Opaque data structures & access tokens
 ---
 
