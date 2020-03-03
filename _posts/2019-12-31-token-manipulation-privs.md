@@ -1,15 +1,7 @@
 ---
 layout: post
 title: Kernel Opaque data structures & access tokens
-date: 2019-12-31
-categories: Blog post
 ---
-
-### Windows Windows Internals | Kernel Opaque data structures & access tokens
-
-#### Author: FULLSHADE
-
-----
 
 **Introduction**
 
