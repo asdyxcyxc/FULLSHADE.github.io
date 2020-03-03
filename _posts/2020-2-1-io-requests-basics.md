@@ -3,9 +3,7 @@ layout: post
 title: Basics of Kernel-mode driver (IRPs) & I/O requests 
 ---
 
-**Introduction:** This post aims to give a better understanding of how I/O requests work within Windows internals.
-
-----
+This post aims to give a better understanding of how I/O requests work within Windows internals.
 
 **The Windows I/O model**
 
