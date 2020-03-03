@@ -1,11 +1,9 @@
 ---
 layout: post
 title: IOCTL's for kernel driver exploit development
-date: 2020-2-1
-tags: Windows
 ---
 
-##### An introduction to IOCTLS's and utilizing and discovering them while conducting Windows kernel exploit development.
+An introduction to IOCTLS's and utilizing and discovering them while conducting Windows kernel exploit development.
 
 ----
 
