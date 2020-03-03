@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Windows Internals - Advanced Windows pool corruption crash analysis 
 ---
 
