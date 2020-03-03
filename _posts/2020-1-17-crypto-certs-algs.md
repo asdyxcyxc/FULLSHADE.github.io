@@ -1,8 +1,6 @@
 ---
 layout: post
 title: Windows CryptoAPI and digital certificate analysis
-date: 2020-01-17
-categories: Blog post
 ---
 
 **Introduction** 
