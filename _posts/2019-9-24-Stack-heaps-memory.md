@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Understanding Windows memory data structures
 ---
 
