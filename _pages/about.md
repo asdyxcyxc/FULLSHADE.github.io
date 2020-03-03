@@ -7,7 +7,9 @@ header:
 permalink: /about.html
 ---
 
-I currently specializes in Windows exploit development and security research. I spends the majority of his time competing in Cybersecurity Capture-The-Flags (CTFs) and hunting new security flaws while performing independent software security audits. I also enjoy producing and disclosing 0-Days, and CVE's through MITRE ATT&CK
+I currently specialize in Windows exploit-development and software security research. I spend the majority of my time researching various aspects of Kernel-Level Windows internals and conducting malware analysis reporting assessments. In my free time, I enjoy competing in Cybersecurity Capture-The-Flags (CTFs) and hunting new security flaws while performing independent software security audits. I also enjoy producing and disclosing 0-Days while working with various companies to ensure the security of their products. Collecting CVE's through MITRE ATT&CK tends to be a product of this. My skill-set ranges from low-level binary/reverse engineering to conducting malware assessments. Outside of the realm of computer security I also tend to enjoy a good game of Chess.
+
+Cheers!
 
 
 Certifications
