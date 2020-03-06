@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Windows Internals - Understanding Windows Heaps & Manager
+title: Understanding the Windows Heaps & Heap Manager
 ---
 
 This article covers the Windows heap manager and various specific heaps that windows has.
