@@ -1,13 +1,11 @@
 # main links links
 main:
-  - title: "Posts"
-    url: /posts.html
 
-  - title: "CVE's"
+  - title: "CVE Collection"
     url: /cves.html
 
   - title: "Malware Reports"
     url: /malware-analysis.html
 
-  - title: "About"
+  - title: "About Me"
     url: /about.html
