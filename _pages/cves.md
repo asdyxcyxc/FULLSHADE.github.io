@@ -13,7 +13,7 @@ This page centralizes my personal collection of obtained CVE's.
 
 ### 2020 (Q1) - CVE Discoveries ###
 
-| Id | CVE ID | Info  |
+| Id | CVE ID | Category  |
 |:---|:--------|--------:|
 | 9 | [CVE-2020-10234](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10234) | Windows Kernel Driver memory corruption (DOS)|
 | 8 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption (DOS)|
