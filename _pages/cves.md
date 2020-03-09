@@ -15,8 +15,8 @@ This page centralizes my personal collection of obtained CVE's.
 
 | Id | CVE ID | Info  |
 |:---|:--------|--------:|
-| 8 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
-| 7 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
+| 8 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption (DOS)|
+(DOS)| 7 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
 | 6 | [CVE-2020-5511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511) | Un-authenticated SQL Injection |
 | 5 | [CVE-2020-5510](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5510) | Un-authenticated SQL Injection |
 | 4 | [CVE-2020-5509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5509) | Authenticated Remote Code Execution|
