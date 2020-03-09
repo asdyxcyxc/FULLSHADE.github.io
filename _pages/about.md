@@ -24,20 +24,7 @@ Certifications
 
 ![sec](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/images/sse.png)
 
-CVEs
----
-
-- CVE-2019-13066 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13066_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13066)
-- CVE-2019-16724 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16724_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16724)
-- CVE-2019-17181 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17181_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17181)
-- CVE-2020-5183 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5183_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5183)
-- CVE-2020-5192 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5192_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5192)
-- CVE-2020-5193 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5193_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5193)
-- CVE-2020-5509 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5509_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5509)
-- CVE-2020-5510 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5510_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5510)
-- CVE-2020-5511 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511)
-- CVE-2020-9014 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014)
-- CVE-2020-9453 - [_https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9453_](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9453)
+----
 
 Whitepapers / Publications
 ---
