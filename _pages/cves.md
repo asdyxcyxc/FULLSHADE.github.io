@@ -28,7 +28,6 @@ This page centralizes my personal collection of obtained CVE's.
 
 | Id | CVE ID | Info  |
 |:---|:--------|--------:|
-
 | 3 | [CVE-2019-19978](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19978) | Reflected XSS |
 | 3 | [CVE-2019-17181](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17181) | Remote SEH Buffer Overflow |
 | 2 | [CVE-2019-16724](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16724) | Remote SEH Buffer Overflow |
