@@ -2,7 +2,10 @@
 main:
   - title: "Posts"
     url: /posts.html
-    
+
+  - title: "CVE's"
+    url: /cves.html
+
   - title: "Malware Reports"
     url: /malware-analysis.html
 
