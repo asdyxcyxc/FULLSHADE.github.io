@@ -11,7 +11,7 @@ This page centralizes my personal collection of obtained CVE's.
 
 ----
 
-### 2020 - CVE discoveries ###
+### 2020 (Q1) - CVE Discoveries ###
 
 | Id | CVE ID | Info  |
 |:---|:--------|--------:|
@@ -24,7 +24,7 @@ This page centralizes my personal collection of obtained CVE's.
 | 2 | [CVE-2020-5192](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5192) | Multiple SQL Injection's |
 | 1 | [CVE-2020-5183](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5183) | Windows user-mode memory corruption |
 
-### 2019 - CVE discoveries ###
+### 2019 - CVE Discoveries ###
 
 | Id | CVE ID | Info  |
 |:---|:--------|--------:|
