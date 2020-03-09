@@ -7,7 +7,7 @@ header:
 permalink: /cves.html
 ---
 
-This page centralizes my personal collection of CVE's obtained.
+This page centralizes my personal collection of obtained CVE's.
 
 ----
 
@@ -16,13 +16,13 @@ This page centralizes my personal collection of CVE's obtained.
 | Id | CVE ID | Info  |
 |:---|:--------|--------:|
 | 1 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
-| 1 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
-| 1 | [CVE-2020-5511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511) | Un-authenticated SQL Injection |
-| 1 | [CVE-2020-5510](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5510) | Un-authenticated SQL Injection |
-| 1 | [CVE-2020-5509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5509) | Authenticated Remote Code Execution|
-| 1 | [CVE-2020-5193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5193) | Reflected XSS |
-| 1 | [CVE-2020-5192](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5192) | Multiple SQL Injection's |
-| 1 | [CVE-2020-5183](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5183) | Windows user-mode memory corruption |
+| 2 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Windows Kernel Driver memory corruption |
+| 3 | [CVE-2020-5511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511) | Un-authenticated SQL Injection |
+| 4 | [CVE-2020-5510](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5510) | Un-authenticated SQL Injection |
+| 5 | [CVE-2020-5509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5509) | Authenticated Remote Code Execution|
+| 6 | [CVE-2020-5193](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5193) | Reflected XSS |
+| 7 | [CVE-2020-5192](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5192) | Multiple SQL Injection's |
+| 8 | [CVE-2020-5183](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5183) | Windows user-mode memory corruption |
 
 ### 2019 - CVE discoveries ###
 
