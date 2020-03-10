@@ -7,7 +7,7 @@ header:
 permalink: /about.html
 ---
 
-My current specialty is Windows Kernel exploit-development and software security research. I spend the majority of my time researching various aspects of Kernel-Level Windows internals and conducting malware analysis reporting assessments. In my free time, I enjoy competing in Cybersecurity Capture-The-Flags (CTFs) and hunting for new security flaws while performing independent software security audits. I also enjoy producing and disclosing 0-Days while working with various companies to ensure the security of their products. Collecting CVE's through MITRE ATT&CK tends to be a result of this. My skill-set ranges from low-level binary/reverse engineering to conducting malware assessments. Outside of the realm of computer security I also tend to enjoy a good game of Chess.
+My current specialty is Windows Offensive security research, kernel exploitation, and anything low-level. I enjoy discovering and disclosing new 0day and building my vast CVE collection. I am also an avid CTF competitor. Outside of the realm of security, I enjoy a good game of chess.
 
 Cheers!
 
