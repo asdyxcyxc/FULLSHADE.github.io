@@ -20,6 +20,9 @@ Certifications
 ![oscp](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/cert-oscp.png)
 
 - eLearnSecurity Junior Penetration Tester (eJPT)
+
+![ejpt](https://cdn-web-pro.elearnsecurity.com//assets/images/certification/ejpt_certificate_sm.png)
+
 - CompTIA Security+
 
 ![sec](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/images/sse.png)
