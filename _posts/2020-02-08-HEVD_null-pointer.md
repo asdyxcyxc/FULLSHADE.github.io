@@ -11,7 +11,7 @@ Walkthrough for the HEVD Windows Kernel Driver exploitation, exploiting a NULL P
 
 NULL Pointer Dereference vulnerabilities are found within C/C++ code. A NULL Pointer Dereference vulnerability occurs when the value of a pointer is set to NULL and it's being used by the application to point to a valid memory location. Normally, the NULL pointer is supposed to point to an area of memory that is invalid. 
 
-As an attacker, if you can take control of the NULL page that the pointer, you can allocate memory in that location and get code execution.
+As an attacker, if you can take control of the NULL page, you can allocate memory in that location, write to it your shellcode token stealing payload and get code execution/EOP.
 
 - https://cwe.mitre.org/data/definitions/476.html
 
@@ -22,7 +22,6 @@ As an attacker, if you can take control of the NULL page that the pointer, you c
 The nullpointerderefence.c source code file provided includes various function allocations at the top.
 
 ```c++
-
 NTSTATUS TriggerNullPointerDereference(_In_ PVOID UserBuffer)
 {
     ULONG UserValue = 0;
@@ -46,6 +45,7 @@ NullPointerDereference = (PNULL_POINTER_DEREFERENCE)ExAllocatePoolWithTag(
 ```
 Here the `ExAllocatePoolWithTag()` function is 
 
+----
 
 **IOCTL Discovery with IDA**
 
@@ -61,10 +61,20 @@ Running it results in the needed IOCTL being displayed within the `TriggerNullPo
 
 From the source code of the driver, we can use the CTL_MACRO to obtain the different values of the IOCTL, which can use with Python to easily calculate the IOCTL for this scenario.
 
+----
+
 **Fuzz for a crash?**
 
 Once we have the IOCTL we need, can quickly use IDA Pro's plugin again to obtain the symlink driver device name so we can fuzz it for a BSOD crash. We can use the kDriverFuzzer with the discovered IOCTL and device name to crash the system.
 
+----
+
 **BSOD POC**
 
+----
+
 **Let's grab System!**
+
+----
+
+**Wrapup**
