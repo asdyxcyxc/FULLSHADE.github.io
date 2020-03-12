@@ -32,7 +32,7 @@ NTSTATUS TriggerNullPointerDereference(_In_ PVOID UserBuffer)
 
 In IDA you can see the if, else statement taking place where it's comparing the UserValue to EAX (the MagicValue)
 
-![ida 1]()
+![ida 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/ida1.png)
 
 And scrolling down reveals the function which shows the pool chunk allocation taking place.
 
