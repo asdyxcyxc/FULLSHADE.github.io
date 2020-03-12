@@ -80,7 +80,9 @@ Once we have the IOCTL we need, we can quickly use IDA Pro's plugin again to obt
 
 ----
 
-**BSOD POC**
+**Memory management exploitation**
+
+For the memory manipulation/exploitation aspect of a NULL Pointer Dereference vulnerability POC, you will need to utilize the `NtAllocateVirtualMemory` function for allocating the NULL memory page.
 
 `NtAllocateVirtualMemory`
 
@@ -94,6 +96,10 @@ __kernel_entry NTSYSCALLAPI NTSTATUS NtAllocateVirtualMemory(
   ULONG     Protect
 );
 ```
+
+The break down for this MSDN Microsoft function is as follows.
+
+- You set the process handler that you want the mapping to occur with. Then you provide the base address of the allocated region page, in this case, it's `0x4` which can be found in the TriggerNullPointerDErefence function in IDA Pro with the code `call dword ptr [esi+4]` this is going to be the location will be writing to. The other important parts of this function definition are the region size and allocation type, for this case we are going to use a 
 
 `WriteProcessMemory`
 
