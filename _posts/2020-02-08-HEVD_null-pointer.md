@@ -82,6 +82,31 @@ Once we have the IOCTL we need, we can quickly use IDA Pro's plugin again to obt
 
 **BSOD POC**
 
+`NtAllocateVirtualMemory`
+
+```c++
+__kernel_entry NTSYSCALLAPI NTSTATUS NtAllocateVirtualMemory(
+  HANDLE    ProcessHandle,
+  PVOID     *BaseAddress,
+  ULONG_PTR ZeroBits,
+  PSIZE_T   RegionSize,
+  ULONG     AllocationType,
+  ULONG     Protect
+);
+```
+
+`WriteProcessMemory`
+
+```c++
+BOOL WriteProcessMemory(
+  HANDLE  hProcess,
+  LPVOID  lpBaseAddress,
+  LPCVOID lpBuffer,
+  SIZE_T  nSize,
+  SIZE_T  *lpNumberOfBytesWritten
+);
+```
+
 ----
 
 **Let's grab System!**
