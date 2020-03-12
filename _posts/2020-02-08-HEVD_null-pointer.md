@@ -43,7 +43,9 @@ NullPointerDereference = (PNULL_POINTER_DEREFERENCE)ExAllocatePoolWithTag(
   (ULONG)POOL_TAG
 );
 ```
-Here the `ExAllocatePoolWithTag()` function is 
+![ida 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/ida2.png)
+
+Here we can see the pool tag "Hack", the magic value and the offset of 0x4, 0x4 is the location that we can write our shellcode to and gain code execution.
 
 ----
 
@@ -57,15 +59,24 @@ We can use the <> plugin in IDA Pro to automate the process of discovery and cal
 
 Running it results in the needed IOCTL being displayed within the `TriggerNullPointerDerefence` function.
 
+![ida 3]()
+
 2. Manual calculation
 
-From the source code of the driver, we can use the CTL_MACRO to obtain the different values of the IOCTL, which can use with Python to easily calculate the IOCTL for this scenario.
+From the source code of the driver, we can use the CTL_MACRO to obtain the different values of the IOCTL.
 
+![macro from source](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/nullprt_calc_ioctl.png)
+
+Which can use with Python to easily calculate the IOCTL for this scenario.
+
+![python ioctl calc](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/ioctl_null_pythoncalc.png)
 ----
 
 **Fuzz for a crash?**
 
-Once we have the IOCTL we need, can quickly use IDA Pro's plugin again to obtain the symlink driver device name so we can fuzz it for a BSOD crash. We can use the kDriverFuzzer with the discovered IOCTL and device name to crash the system.
+Once we have the IOCTL we need, we can quickly use IDA Pro's plugin again to obtain the symlink driver device name so we can fuzz it for a BSOD crash. We can use the kDriverFuzzer with the discovered IOCTL and device name to crash the system.
+
+![fuzzer]()
 
 ----
 
