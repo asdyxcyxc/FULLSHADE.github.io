@@ -148,6 +148,8 @@ kernel32.RtlMoveMemory(c_int(ptr), buff, c_int(len(shellcode)))
 
 **Let's grab System!**
 
+![EOP](https://raw.githubusercontent.com/FULLSHADE/Windows-Kernel-Exploitation-HEVD/master/images/hevd-null-ptr-shell.png)
+
 ----
 
 **Wrapup**
