@@ -7,7 +7,7 @@ header:
 permalink: /about.html
 ---
 
-My current specialty is Windows Offensive security research, kernel exploitation, and anything low-level. I enjoy discovering and disclosing new 0day and building my vast CVE collection. I am also an avid CTF competitor. Outside of the realm of security, I enjoy a good game of chess.
+My current specialty is Windows Offensive security research, kernel exploitation, and anything low-level. I enjoy discovering and disclosing new 0day's and building my vast CVE collection. I am also an avid CTF competitor. Outside of the realm of security, I enjoy a good game of chess.
 
 Cheers!
 
