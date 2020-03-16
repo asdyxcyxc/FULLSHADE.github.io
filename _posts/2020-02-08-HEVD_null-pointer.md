@@ -136,17 +136,21 @@ Before you allocate the payload, you can break the running process (debuggee) an
 
 ![before allocation of the memory](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/nullptr-before-alloc.png)
 
-You can see that before our allocation, the memory addresses are all filled with ???????? which shows that they are NULL.
+You can see that before our allocation, the memory addresses are all filled with `????????` which shows that they are NULL.
 
 **After memory allocation**
 
 After you allocate the memory and send our "shellcode" payload (41414141), if you set a breakpoint on the vulnerable function or have the system BSOD (crash) after you allocated the memory, you can see the pointer to your shellcode payload is located in `0x00000004`.
 
+![after memory alloc, written]()
+
 You can use the command `uf <pointer address>` to view the unassembled version of the code and the specified memory address.
 
-Now, in the sense of a NULL Pointer Dereference vulnerability and exploit development procedure, an attacker can follow the workflow as stated below.
+![dissas memory shellcode pointer]()
 
 ----
+
+Now, in the sense of a NULL Pointer Dereference vulnerability and exploit development procedure, an attacker can follow the workflow as stated below.
 
 **NULL Pointer dereference workflow**
 
@@ -189,4 +193,4 @@ NULL Pointer Derefences is a very commonly discovered vulnerability class, espec
 
 **Exploitation on a 64-bit system**
 
-If you try and exploit this on a 64-bit system, you will run into a `NtAllocateVirtualMemory` problem which is denying memory allocation to a control if the `BaseAddress` is below 0x1000. This can be shown via a `STATUS_INVALID_PARAMETER_2` status error. 
+If you try and exploit this on a 64-bit system, you will run into a `NtAllocateVirtualMemory` problem which is denying memory allocation to control if the `BaseAddress` is below 0x1000. This can be shown via a `STATUS_INVALID_PARAMETER_2` status error. 
