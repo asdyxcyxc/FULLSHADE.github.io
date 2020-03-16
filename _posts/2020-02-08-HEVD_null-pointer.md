@@ -53,15 +53,7 @@ Here we can see the pool tag "Hack", the magic value and the offset of 0x4, 0x4 
 
 There are a few methods/ways we can discover the needed IOCTL for communicating with this aspect of the kernel-mode driver.
 
-1. IDA Pro automated IOCTL discovery
-
-We can use the <> plugin in IDA Pro to automate the process of discovery and calculating IOCTLs found in functions.
-
-Running it results in the needed IOCTL being displayed within the `TriggerNullPointerDerefence` function.
-
-![ida 3]()
-
-2. Manual calculation
+Manual calculation
 
 From the source code of the driver, we can use the CTL_MACRO to obtain the different values of the IOCTL.
 
@@ -123,12 +115,42 @@ BOOL WriteProcessMemory(
 
 After we allocate the NULL page, we can write to the location via the `WriteProcessMemory` function, the way this works parameter by parameter is as follows. The `hProcess` member is a handle to the process memory that's going to be modified, which is our current process. You can either use a Python ctypes `GetCurrentProcess()` function or provide it with `0xFFFFFFF`, then you provide the base address of the allocated region page that we want to write to, in this case, it's `0x00000004` which can be found in the TriggerNullPointerDerefence function in IDA Pro with the code `call dword ptr [esi+4]` this is going to be the location will be writing to.
 
-FOr our HEVD exploit in Python you can use this function as so.
+For our HEVD exploit in Python you can use this function as so.
 
 ```python
 if kernel32.WriteProcessMemory(0xFFFFFFFF, 0x00000004, payload_final, 0x400, byref(c_ulong())):
     print("[+] success writing to memory")
 ```
+
+----
+
+**Crash analysis to understand our exploit**
+
+Before we get into the shellcode management section, let's conduct some crash analysis where we can understand and learn more about how our allocation/memory writing will pan out. We can start by running a minimized/skeleton version of our exploit which excludes a real shellcode payload.
+
+This BSOD POC will allocate the NULL memory page, and write a 4-byte shellcode payload (41414141) to our specified memory location.
+
+![before allocation of the memory](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/nullptr-before-alloc.png)
+
+Before you allocate the payload, you can break the running process (debuggee) and use the command `dd 0x00000004` to view the memory at that specific location.
+
+If you set a breakpoint on the vulnerable function or have the system BSOD (crash) after you allocated the memory, you can see the pointer to your shellcode payload is located in `0x00000004`.
+
+You can use the command `uf <pointer address>` to view the unassembled version of the code and the specified memory address.
+
+Now, in the sense of a NULL Pointer Dereference vulnerability and exploit development procedure, an attacker can follow the workflow as stated below.
+
+----
+
+1. Obtain handler to device driver - Using the CreateFileA() function
+2. Allocate a certain amount of memory --> Using the NtAllocateVirtualMemory() function
+3. Create a token stealing shellcode payload --> You may need to provide a cleanup routine
+4. Create a pointer to your shellcode --> Using the VirtualAlloc() function 
+5. Move your shellcode into your VirtualAlloc buffer --> Using the RtlMoveMemory() function
+6. Pack your shellcode payload and create a little-endian format --> Using struct
+7. Write your shellcode payload to the specific location --> Using the WriteProcessMemory() function
+8. Trigger the entire exploit by sending everything to the driver --> Using the DeviceIoControl() function
+9. Spawn a new elevated command prompt -->  Using the stolen System token
 
 ----
 
@@ -143,13 +165,20 @@ ptr = kernel32.VirtualAlloc(c_int(0), c_int(len(shellcode)), c_int(0x3000), c_in
 buff = (c_char * len(shellcode)).from_buffer(shellcode)
 kernel32.RtlMoveMemory(c_int(ptr), buff, c_int(len(shellcode)))
 ```
-
 ----
 
 **Let's grab System!**
+
+After following the specified memory management and provided workflow for this exploitation technique, you should be able to spawn a new command prompt with elevated permissions.
 
 ![EOP](https://raw.githubusercontent.com/FULLSHADE/Windows-Kernel-Exploitation-HEVD/master/images/hevd-null-ptr-shell.png)
 
 ----
 
-**Wrapup**
+**Wrapup & conclusion**
+
+NULL Pointer Derefences is a very commonly discovered vulnerability class, especially in complex drivers, proper exploitation of this vulnerability can lead to an unprivileged attacked to write and execute shellcode in kernel-mode. Granting the attack an elevated sense of permissions on the system.
+
+**Exploitation on a 64-bit system**
+
+If you try and exploit this on a 64-bit system, you will run into a `NtAllocateVirtualMemory` problem which is denying memory allocation to a control if the `BaseAddress` is below 0x1000. This can be shown via a `STATUS_INVALID_PARAMETER_2` status error. 
