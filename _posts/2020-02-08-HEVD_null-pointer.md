@@ -171,9 +171,7 @@ After you allocate the memory and send our "shellcode" payload (41414141), if yo
 
 ![after memory alloc, written]()
 
-You can use the command `uf <pointer address>` to view the unassembled version of the code and the specified memory address.
-
-![dissas memory shellcode pointer]()
+For now it's only displaying the raw shellcode, which is why you will need to follow the upcoming VirtualAlloc manipulation to obtain a pointer which you can write to memory, because for your actual EOP payload, you want it to display the pointer, and not the raw shellcode in `0x0000004`
 
 ----
 
@@ -217,6 +215,8 @@ After following the specified memory management and provided workflow for this e
 **Wrapup & conclusion**
 
 NULL Pointer Derefences is a very commonly discovered vulnerability class, especially in complex drivers, proper exploitation of this vulnerability can lead to an unprivileged attacked to write and execute shellcode in kernel-mode. Granting the attack an elevated sense of permissions on the system.
+
+----
 
 **Exploitation on a 64-bit system**
 
