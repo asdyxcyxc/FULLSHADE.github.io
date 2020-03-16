@@ -130,17 +130,25 @@ Before we get into the shellcode management section, let's conduct some crash an
 
 This BSOD POC will allocate the NULL memory page, and write a 4-byte shellcode payload (41414141) to our specified memory location.
 
-![before allocation of the memory](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/nullptr-before-alloc.png)
+**Before memory allocation**
 
 Before you allocate the payload, you can break the running process (debuggee) and use the command `dd 0x00000004` to view the memory at that specific location.
 
-If you set a breakpoint on the vulnerable function or have the system BSOD (crash) after you allocated the memory, you can see the pointer to your shellcode payload is located in `0x00000004`.
+![before allocation of the memory](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/nullptr-before-alloc.png)
+
+You can see that before our allocation, the memory addresses are all filled with ???????? which shows that they are NULL.
+
+**After memory allocation**
+
+After you allocate the memory and send our "shellcode" payload (41414141), if you set a breakpoint on the vulnerable function or have the system BSOD (crash) after you allocated the memory, you can see the pointer to your shellcode payload is located in `0x00000004`.
 
 You can use the command `uf <pointer address>` to view the unassembled version of the code and the specified memory address.
 
 Now, in the sense of a NULL Pointer Dereference vulnerability and exploit development procedure, an attacker can follow the workflow as stated below.
 
 ----
+
+**NULL Pointer dereference workflow**
 
 1. Obtain handler to device driver - Using the CreateFileA() function
 2. Allocate a certain amount of memory --> Using the NtAllocateVirtualMemory() function
