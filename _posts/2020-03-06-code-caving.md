@@ -28,8 +28,13 @@ Now we can open up our new binary in Immunity Debugger. If you run the applicati
 
 From here you copy the `.shell` section headers address and edit the Program entry point to a `JMP <SECTION ADDRESS>`. 
 
-![code caving 3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_4.png)
+![code caving 4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_4.png)
 
-![code caving 3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_5.png)
+![code caving 5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_5.png)
+
+Now you can press `F7` and step into the newly edited JMP call, this will lead to our new section we created.
+
+![code caving 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_6.png)
+
 
 ----
