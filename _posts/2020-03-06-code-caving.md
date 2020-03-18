@@ -3,10 +3,10 @@ layout: single
 title: Code caving & backdooring Windows PE files
 ---
 
-Code caving is a technique deployed by threat actors to run malicious shellcode without the valid PE space of a regular program. It's a technique where an actor discovered an un-used or non-optimized part of code within a compiled program that they can use for hijacking the execution flow, which can lead to the application executing a malicious shellcode payload.
+Code caving is a technique deployed by threat actors to run malicious shellcode within the valid PE space of a regular program. It's a technique where an actor discovered a un-used or non-optimized part of code within a compiled program that they can use via hijacking the execution flow to point to this location that has shellcode allocated in it. Which can lead to the application executing a malicious shellcode payload.
 
 ### Thanks Wikipedia
-> A code cave is a series of null bytes in a process's memory. The code cave inside a process's memory is often a reference to a section of the code's script functions that have capacity for the injection of custom instructions. For example, if a script's memory allows for five bytes and only three bytes are used, then the remaining two bytes can be used to add additional code to cript without making significant changes. 
+> A code cave is a series of null bytes in a process's memory. The code cave inside a process's memory is often a reference to a section of the code's script functions that have the capacity for the injection of custom instructions. For example, if a script's memory allows for five bytes and only three bytes are used, then the remaining two bytes can be used to add additional code to cript without making significant changes. 
 
 ---
 
@@ -14,13 +14,33 @@ This walkthrough will be utilizing an older version of Putty, Putty v0.66, which
 
 ----
 
-We can start by opening up putty.exe within CFF Explorer to view the PE data.
+**Our exploitation & backdooring workflow**
+
+Our workflow is as follows. 
+
+1. We add another section to the binary and fill it up with empty space, also give it the name of our choosing.
+2. Find the entry point for the binary
+3. Find the address of your newly created section in the binary
+4. Write your msfvenom shellcode payload to the empty created section
+5. Re-write the empty point as a JMP to the malicious section.
+6. Have the shellcode return execution back to the normal flow
+6. Patch and save the binary
+
+----
+
+**Binary section analysis & creation**
+
+We can start by opening up putty.exe within CFF Explorer to view the PE data. CFF Explorer will give us plenty of details about the binary, the important part is the sections tab. This technique is to add a malicious section to the binary. 
 
 ![code caving 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_1.png)
 
 Open up the section headers tab and we need to add a new header, this header will be utilized for malicious purposes. Go to `Section Headers [x]` > Right-click and select `Add Section (Empty Space)`, and adjust the size of the section to 1000 spaces. Then name your new section header. I will be naming it `.shell`. Adding these spaces will allow the program to be sen as a legitimate application instead of just throwing you an error and crashing if you don't have data. This blank data will also be utilized soon.
 
 ![code caving 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_2.png)
+
+----
+
+**Debugging the application**
 
 Now we can open up our new binary in Immunity Debugger. If you run the application it will show "Program entry point" on the bottom left of Immunity, this is what we want to hijack to point to our soon to be malicious `.shell` segment.
 
@@ -32,11 +52,15 @@ From here you copy the `.shell` section headers address and edit the Program ent
 
 ![code caving 5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_5.png)
 
-Now you can press `F7` and step into the newly edited JMP call, this will lead to our new section we created.
+Now you can press `F7` and step into the newly edited JMP call, this will lead to the new section we created.
 
 ![code caving 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_6.png)
 
 Now you also want to edit the new section in Immunity and add a `PUSHFD` to the start of your malicious new section. Assemble it when done.
+
+----
+
+**Malicious payload creation**
 
 Now you can generate your msfvenom payload, use a `EXITFUNC=seh` to ensure it handles proper exiting to add to the stability and reliability of your shell. Generate it in hex format since it's going to be directly pasted into the binary/machine code.
 
@@ -58,13 +82,21 @@ You you can now copy past this into Immunity Debugger into your new malicious se
 
 ![code caving 7](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_7.png)
 
+----
+
+**Obtain a shell**
+
 You can run it within Immunity, but if you want to export the now backdoored file, you just need to save the patched file and run it to obtain that sweet reverse shell.
 
 ![code caving 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_8.png)
 
 ----
 
-
 **Binary diffing with IDA Pro**
 
 Let's compare the execution flow of the original application vs. the newly patched & malicious binary. We can utilize IDA Pro for binary diffing.
+
+
+----
+
+**Conclusion**
