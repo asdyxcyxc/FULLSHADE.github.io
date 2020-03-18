@@ -54,7 +54,15 @@ a05680a000051680200270f89e66a1056576899a57461ffd585c0740cff4e0875ec68f0b5a256ffd
 3c01018d442410c60044545056565646564e565653566879cc3f86ffd589e04e5646ff306808871d60ffd5bbfe0e32ea68a695bd9dffd53c067c0a80fbe07
 505bb4713726f6a0053ffd5
 ```
-![code caving 7](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_6.png)
+![code caving 7](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_7.png)
 
+Now you just need to save the patched file and run it to obtain that sweet reverse shell.
+
+![code caving 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_8.png)
 
 ----
+
+
+**Binary diffing with IDA Pro**
+
+Let's compare the execution flow of the original application vs. the newly patched & malicious binary. We can utilize IDA Pro for binary diffing.
