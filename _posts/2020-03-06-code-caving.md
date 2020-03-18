@@ -90,13 +90,16 @@ You can run it within Immunity, but if you want to export the now backdoored fil
 
 ![code caving 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_8.png)
 
-----
+I do wonder if this would get detected by anti-virus.... This technique is old and highly detected, an attacker would need to further protect their binary from AV detection if they wanted this to actually work.
 
-**Binary diffing with IDA Pro**
-
-Let's compare the execution flow of the original application vs. the newly patched & malicious binary. We can utilize IDA Pro for binary diffing.
-
+![code caving 9](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_9.png)
 
 ----
 
 **Conclusion**
+
+This post covered a fairly simple technique for backdooring a Windows PE binary, using execution flow highjacking and PE section create, we can plant a malicious shellcode payload within a normal binary, have it execute our shell, and give an attacker remote access to the victims system via them running a binary they think is supposed to be normal.
+
+*Further research*
+
+As a challenge to anyone who reads this, try to have the malicious payload redirect it's execution flow back to the normal application so it loads as a normal binary should, this will add the elusion that nothing wrong is occurring when a victim runs the application.
