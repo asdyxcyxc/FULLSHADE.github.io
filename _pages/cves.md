@@ -35,3 +35,13 @@ This page centralizes my personal collection of obtained CVE's.
 | 3 | [CVE-2019-13066](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13066) | Multiple Reflected XSS |
 | 2 | [CVE-2019-13065](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13065) | Reflected XSS |
 | 1 | [CVE-2019-13064](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13064) | Reflected XSS |
+
+
+----
+
+|  | Actions to be Taken by FullPwn Operations |
+|:---|--------:|
+| Day 0 | Intial vendor contact |
+| Day 7 | Second vendor contact if no original response |
+| Day 14 | If the vendor has not responded or has stopped responding, within 10 days full disclosure notice |
+| Day 40 | Full public disclosure if the vendor hasn't responded | 
