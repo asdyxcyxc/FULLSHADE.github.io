@@ -39,9 +39,19 @@ This page centralizes my personal collection of obtained CVE's.
 
 ----
 
+### Vendor Vulnerability Reporting and Disclosure Policy
+
+This policy sets for the reporting and disclosure policy that FullPwn Operations follows when handling a disclosure case with a vendor. If a vulnerability is discovered within a vendor product, the vendor will be contacted via email with details and a security report about the details of the vulnerability and the proper mitigation strategy that the vendor may take to patch the application.
+
+This vulnerability disclosure policy is similar to the [CERT](https://vuls.cert.org/confluence/display/Wiki/Vulnerability+Disclosure+Policy) disclosure policy of 45 days.
+
+The following steps will be taken if a vulnerability is disclosed to a vendor.
+
 |  | Actions to be Taken by FullPwn Operations |
-|:---|--------:|
-| Day 0 | Intial vendor contact |
+|:---|:--------|
+| Day 0 | - Intial vendor contact |
 | Day 7 | Second vendor contact if no original response |
 | Day 14 | If the vendor has not responded or has stopped responding, within 10 days full disclosure notice |
-| Day 40 | Full public disclosure if the vendor hasn't responded | 
+| Day 45 | Full public disclosure if the vendor hasn't responded | 
+
+If a vendor is interested in extending or working with FullPwn Operations on a specific aspect of vulnerability disclosure, feel free to include that in any contact emails.
