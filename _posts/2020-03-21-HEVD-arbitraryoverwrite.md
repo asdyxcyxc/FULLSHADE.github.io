@@ -17,5 +17,18 @@ The payload that will be written is the say token-stealing shellcode payload tha
 
 ### Where
 
-This technique is cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
+This technique  will cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
 
+----
+
+### The HEVD vulnerability & analysis
+
+### IOCTL discovery & driver communication
+
+### HalDistpatchTable research & analysis
+
+### Overwriting 0x4
+
+### Triggering our shellcode with NtQueryIntervalProfile
+
+### \/\/ EOP Party!!! \/\/
