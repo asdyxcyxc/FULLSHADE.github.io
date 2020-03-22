@@ -3,7 +3,7 @@ layout: single
 title: HEVD - Windows 7 x86 Kernel Write-What-Where (Arbitrary Write)
 ---
 
-This post covers the HEVD exploitation of overwriting HalDispatchTable+0x4 and calling NtQueryIntervalProfile() to obtain EOP.
+This post covers the HEVD exploitation of overwriting `HalDispatchTable+0x4` and calling `NtQueryIntervalProfile()` to obtain EOP.
 
 Let's get this over with so I can go back to exploring Windows 10 and re-reading Windows Internals along with the new Windows 10 programming book that Pavel is releasing. Arbitrary Overwrites, otherwise can be referred to in this context as Write-What-Where exploitation, or even better, HalDistpatchTable overwrites. This post will focus on exploiting the Arbitrary Write vulnerability in the HEVD driver on a Windows 7 x86 system.
 
@@ -17,7 +17,7 @@ The payload that will be written is the say token-stealing shellcode payload tha
 
 ### Where
 
-This technique  will cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
+This technique  will cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, we will overwrite a Dispatch Table pointer, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
 
 ----
 
@@ -26,6 +26,8 @@ This technique  will cover the `HalDispatchTable+0x4` exploitation technique, wh
 ### IOCTL discovery & driver communication
 
 ### HalDistpatchTable research & analysis
+
+### Get the Base Name and address from ntkrnlpa.exe
 
 ### Overwriting 0x4
 
