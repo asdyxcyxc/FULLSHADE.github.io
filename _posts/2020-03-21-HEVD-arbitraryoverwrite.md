@@ -31,4 +31,4 @@ This technique  will cover the `HalDispatchTable+0x4` exploitation technique, wh
 
 ### Triggering our shellcode with NtQueryIntervalProfile
 
-### \/\/ EOP Party!!! \/\/
+### \\(ツ)/  EOP Party!!! \\(ツ)/
