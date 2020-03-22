@@ -21,11 +21,13 @@ This technique  will cover the `HalDispatchTable+0x4` exploitation technique, wh
 
 ----
 
+### HalDistpatchTable exploitation research & analysis
+
+How exactly are we going to pull off this exploit? let's take a deep dive into the HalDistpatchTable, it's members, and the technique we will utilize.
+
 ### The HEVD vulnerability & analysis
 
 ### IOCTL discovery & driver communication
-
-### HalDistpatchTable research & analysis
 
 ### Get the Base Name and address from ntkrnlpa.exe
 
