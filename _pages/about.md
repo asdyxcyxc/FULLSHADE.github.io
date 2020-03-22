@@ -7,30 +7,32 @@ header:
 permalink: /about.html
 ---
 
-My current specialty is Windows Offensive security research, kernel exploitation, and anything low-level. I enjoy discovering and disclosing new 0day's and building my vast CVE collection. I am also an avid CTF competitor. Outside of the realm of security, I enjoy a good game of chess.
+My current specialty/hobby is Offensive Windows security research, Windows kernel exploitation, pentesting, and foreign intelligence APT threat analysis.
+
+I enjoy discovering and disclosing new 0day's through companies via responsible disclosure and building my vast CVE collection via independent security research. I am also an avid CTF competitor, I attempt to compete weekly in a CTF competition to keep my skills and mind sharp. 
+
+Outside of the realm of security, I enjoy a good game of chess.
 
 Cheers!
 
+----
 
-Certifications
----
+### Certifications
 
 - Offensive Security Certified Professional (OSCP)
-
-![oscp](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/cert-oscp.png)
-
 - eLearnSecurity Junior Penetration Tester (eJPT)
-
-![ejpt](https://cdn-web-pro.elearnsecurity.com//assets/images/certification/ejpt_certificate_sm.png)
-
 - CompTIA Security+
 
-![sec](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/images/sse.png)
+[In-Progress]
+
+- CompTIA CYSA+
+- Splunk Core Certified User
+- SLAE
 
 ----
 
-Whitepapers / Publications
----
+### Whitepapers / Publications
+
 
 - Bypassing a null byte POP/POP/RET sequence - [https://www.exploit-db.com/docs/47833](https://www.exploit-db.com/docs/47833)
 
