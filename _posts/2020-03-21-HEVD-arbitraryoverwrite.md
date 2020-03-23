@@ -88,6 +88,12 @@ Our exploitation workflow is as follows
 
 ### IOCTL discovery & driver communication
 
+![ioctl 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www2.png)
+
+
+![ioctl 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www3.png)
+
+
 ### Get the Base Name and address from ntkrnlpa.exe
 
 ### Overwriting 0x4
