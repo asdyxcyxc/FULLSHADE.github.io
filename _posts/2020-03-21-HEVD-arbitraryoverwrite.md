@@ -23,7 +23,13 @@ This technique  will cover the `HalDispatchTable+0x4` exploitation technique, wh
 
 ### HalDistpatchTable exploitation research & analysis
 
-How exactly are we going to pull off this exploit? let's take a deep dive into the HalDistpatchTable, it's members, and the technique we will utilize.
+The HalDispatchTable is responsible for acting as a table which holds function pointers to various HAL routines. The HAL (Hardware Abstraction Layer) is responsible for acting as a software layer between kernel-mode execution and as an interface to hardware (motherboards, CPU, NICs, other devices) and the HAL is located in `hal.dll` which is invoked by `ntoskrnl.exe`
+
+**Our exploitation technqiue**
+
+With our arbitrary write vulnerability, we can write a controlled payload address to a controlled memory location in the kernel. 
+
+With our Arbitrary Write we need to find a good place to write to. We are going to overwrite a pointer that resides in the HalDispatchTable, specifically we want to utilize the `HalDispatchTable` since we can invoke and call it from a user-mode perspective, we can call aspects of the `HalDispatchTable` via the undocumented function `NtQueryIntervalProfile` which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to perform a call to `HalDispatchTable+0x4`. So if we overwrite `HalDispatchTable+0x4` and then invoke the `NtQueryIntervalProfile` function as a trigger, we can *write* our shellcode payload pointer into KernelLand and have it triggered via a UserLand function call.
 
 ### The HEVD vulnerability & analysis
 
