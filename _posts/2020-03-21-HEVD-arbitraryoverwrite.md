@@ -9,7 +9,7 @@ Let's get this over with so I can go back to exploring Windows 10 and re-reading
 
 ### Write 
 
-If you can gain some kind of arbitrary write in the Windows kernel, you can obviously leverage that for EOP.
+If you can gain some kind of arbitrary write in the Windows kernel, you can leverage that for EOP.
 
 ### What
 
@@ -17,7 +17,7 @@ The payload that will be written is the say token-stealing shellcode payload tha
 
 ### Where
 
-This technique  will cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, we will overwrite a Dispatch Table pointer, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
+This technique will cover the `HalDispatchTable+0x4` exploitation technique, where we will write our shellcode address into the HAL Dispatch table, we will overwrite a Dispatch Table pointer, which we can later call with the `NtQueryIntervalProfile` function. On that note, this post will also be covering some undocumented Windows API function research with WinDBG.
 
 ----
 
@@ -29,7 +29,31 @@ The HalDispatchTable is responsible for acting as a table which holds function p
 
 With our arbitrary write vulnerability, we can write a controlled payload address to a controlled memory location in the kernel. 
 
-With our Arbitrary Write we need to find a good place to write to. We are going to overwrite a pointer that resides in the HalDispatchTable, specifically we want to utilize the `HalDispatchTable` since we can invoke and call it from a user-mode perspective, we can call aspects of the `HalDispatchTable` via the undocumented function `NtQueryIntervalProfile` which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to perform a call to `HalDispatchTable+0x4`. So if we overwrite `HalDispatchTable+0x4` and then invoke the `NtQueryIntervalProfile` function as a trigger, we can *write* our shellcode payload pointer into KernelLand and have it triggered via a UserLand function call.
+With our Arbitrary Write we need to find a good place to write to. We are going to overwrite a pointer that resides in the HalDispatchTable, specifically we want to utilize the `HalDispatchTable` since we can invoke and call it from a user-mode perspective, we can call aspects of the `HalDispatchTable` via the undocumented function `NtQueryIntervalProfile`
+
+```c++
+NTSTATUS 
+NtQueryIntervalProfile (
+    KPROFILE_SOURCE ProfileSource, 
+    ULONG *Interval);
+```
+
+which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to leverage a call to `HalDispatchTable+0x4`. So if we overwrite `HalDispatchTable+0x4` and then invoke the `NtQueryIntervalProfile` function as a trigger, we can *write* our shellcode payload pointer into KernelLand and have it triggered via a UserLand function call.
+
+So why 0x4 in the HAL Heap table?
+
+We can see how the `KeQueryIntervalProfile` function specifically will invoke a call to the 0x4 location of the HAL table.
+
+![hal 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www1.png)
+
+So when we overwrite this location, we can call it from a user-mode function. 
+
+Our exploitation workflow is as follows
+
+1. Locate the `HalDispatchTable` in the kernel (via the `NtQuerySystemInformation` function)
+2. Overwrite 0x4 with our shellcode payload pointer address
+3. Calculate and locate the address of NtQueryIntervalProfile
+4. Call `NtQueryIntervalProfile` and trigger our EOP shell
 
 ### The HEVD vulnerability & analysis
 
