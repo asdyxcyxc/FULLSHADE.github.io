@@ -57,6 +57,35 @@ Our exploitation workflow is as follows
 
 ### The HEVD vulnerability & analysis
 
+```c++
+#ifdef SECURE
+        // Secure Note: This is secure because the developer is properly validating if address
+        // pointed by 'Where' and 'What' value resides in User mode by calling ProbeForRead()
+        // routine before performing the write operation
+        ProbeForRead((PVOID)Where, sizeof(PULONG_PTR), (ULONG)__alignof(PULONG_PTR));
+        ProbeForRead((PVOID)What, sizeof(PULONG_PTR), (ULONG)__alignof(PULONG_PTR));
+
+        *(Where) = *(What);
+#else
+        DbgPrint("[+] Triggering Arbitrary Overwrite\n");
+
+        // Vulnerability Note: This is a vanilla Arbitrary Memory Overwrite vulnerability
+        // because the developer is writing the value pointed by 'What' to memory location
+        // pointed by 'Where' without properly validating if the values pointed by 'Where'
+        // and 'What' resides in User mode
+        *(Where) = *(What);
+#endif
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {
+        Status = GetExceptionCode();
+        DbgPrint("[-] Exception Code: 0x%X\n", Status);
+    }
+
+    return Status;
+}
+```
+
+
 ### IOCTL discovery & driver communication
 
 ### Get the Base Name and address from ntkrnlpa.exe
