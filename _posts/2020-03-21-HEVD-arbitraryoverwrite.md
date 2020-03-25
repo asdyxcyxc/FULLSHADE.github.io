@@ -147,6 +147,9 @@ if __name__ == "__main__":
 
 ### Get the Base Name and address from ntkrnlpa.exe
 
+To get the base address of ntkrnlpa.exe we can use the EnumDeviceDrivers function
+
+
 ### Overwriting 0x4
 
 ### Triggering our shellcode with NtQueryIntervalProfile
