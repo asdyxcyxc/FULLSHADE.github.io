@@ -38,21 +38,28 @@ NtQueryIntervalProfile (
     ULONG *Interval);
 ```
 
-which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to leverage a call to `HalDispatchTable+0x4`. So if we overwrite `HalDispatchTable+0x4` and then invoke the `NtQueryIntervalProfile` function as a trigger, we can *write* our shellcode payload pointer into KernelLand and have it triggered via a UserLand function call.
+which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to leverage a call to `HalDispatchTable+0x4`. So if we overwrite `HalDispatchTable+0x4` and then invoke the `NtQueryIntervalProfile` function, that acts as a trigger. We can *write* our shellcode payload pointer into KernelLand and have it triggered via a UserLand function call.
 
 So why 0x4 in the HAL Heap table?
 
 We can see how the `KeQueryIntervalProfile` function specifically will invoke a call to the 0x4 location of the HAL table.
 
+```c++
+ULONG
+KeQueryIntervalProfile(
+  IN  KPROFILE_SOURCE ProfileSource
+  );
+```
+
 ![hal 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www1.png)
 
-So when we overwrite this location, we can call it from a user-mode function. 
+So when we overwrite 0x4, we can call it from a user-mode function (NtQueryIntervalProfile). 
 
 Our exploitation workflow is as follows
 
 1. Locate the `HalDispatchTable` in the kernel (via the `NtQuerySystemInformation` function)
-2. Overwrite 0x4 with our shellcode payload pointer address
-3. Calculate and locate the address of NtQueryIntervalProfile
+2. Overwrite `HalDispatchTable+0x4` with our shellcode payload pointer address
+3. Calculate and locate the address of `NtQueryIntervalProfile`
 4. Call `NtQueryIntervalProfile` and trigger our EOP shell
 
 ### The HEVD vulnerability & analysis
