@@ -42,6 +42,10 @@ which will invoke `nt!KeQueryIntervalProfile` in the kernel which is used to lev
 
 So why 0x4 in the HAL Heap table?
 
+As mentioned the `NtQueryIntervalProfile` function makes a direct call to `KeQueryIntervalProfile`, you can see that occuring below.
+
+![hal 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www4.png)
+
 We can see how the `KeQueryIntervalProfile` function specifically will invoke a call to the 0x4 location of the HAL table.
 
 ```c++
@@ -51,7 +55,7 @@ KeQueryIntervalProfile(
   );
 ```
 
-![hal 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www1.png)
+![hal 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/hevd_www1.png)
 
 So when we overwrite 0x4, we can call it from a user-mode function (NtQueryIntervalProfile). 
 
