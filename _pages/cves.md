@@ -15,7 +15,7 @@ This page centralizes my personal collection of obtained CVE's.
 
 | Id | CVE ID | Category  |
 |:---|:--------|--------:|
-| 9 | [CVE-2020-10234](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10234) | WiEpson EMPNSA.sys IOCTL corruption(DOS)|
+| 9 | [CVE-2020-10234](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10234) | Epson EMPNSA.sys IOCTL corruption(DOS)|
 | 8 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Epson EMPNSA.sys IOCTL corruption(DOS)|
 | 7 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Epson EMPMAU.sys IOCTL corruption (DOS)|
 | 6 | [CVE-2020-5511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511) | PHPGurukul Small CRM v2.0  SQL Injection |
