@@ -5,3 +5,16 @@ title: HEVD - Windows 7 x86 Pool Overflow w/ Pool Feng-Shui
 
 This post covers the exploitation of a basic pool overflow vulnerability that resides in a kernel-mode third-party driver, exploitation on a Windows 7 x86 system (executable pool).
 
+In kernel mode, for memory allocation there are memory pools, which is a kernel object that will allow memory blocks to be dynamically allocated when needed. The memory manager will create memory pools that the system and kernel-mode drivers can use to allocate memory. 
+
+There are two types of memory pools, nonpaged pools and paged pools. Both of these memory pool types are located in the address space region that is reserved for system memory allocation.
+
+To learn more about kernel-mode memory pools you can refer to the previously written post linked below.
+
+- https://fullpwnops.com/Windows-pool-and-vulns/
+
+As for the kernel-mode driver HEVD, there is what's known as a kernel pool overflow vulnerability, where it doesn't properly manage user input, and essentially what occurs is a form of an out-of-bounds vulnerability but just within kernel pool memory.
+
+To take advantage of this type of vulnerability we are going to have to spray the kernel pool to groom it in such a manner that we can predictably set it up so we can call or shellcode from a memory location. We are going to have to influence the pool allocator and it's deallocation mechanisms.
+
+This driver's vulnerability allows for a user buffer that's a located in a nonpaged pool, so we will allocate and groom the nonpaged pool with various types of kernel mode allocated objects.
