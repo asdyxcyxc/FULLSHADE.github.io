@@ -15,6 +15,6 @@ To learn more about kernel-mode memory pools you can refer to the previously wri
 
 As for the kernel-mode driver HEVD, there is what's known as a kernel pool overflow vulnerability, where it doesn't properly manage user input, and essentially what occurs is a form of an out-of-bounds vulnerability but just within kernel pool memory.
 
-To take advantage of this type of vulnerability we are going to have to spray the kernel pool to groom it in such a manner that we can predictably set it up so we can call or shellcode from a memory location. We are going to have to influence the pool allocator and it's deallocation mechanisms.
+To take advantage of this type of vulnerability we are going to have to spray the kernel pool to groom it in such a manner that we can predictably set it up so we can call our shellcode from a memory location. We are going to have to influence the pool allocator and it's deallocation mechanisms.
 
 This driver's vulnerability allows for a user buffer that's a located in a nonpaged pool, so we will allocate and groom the nonpaged pool with various types of kernel mode allocated objects.
