@@ -15,6 +15,8 @@ One of the security mitigations that has been implemented is known as KASLR (ker
 
 This post will review a few of the various techniques (including POC code) that can be used to leak some windows kernel addresses on a **Windows 10 1607** and **1703** build.
 
+Said kernel addresses may be combined with various exploitation tactics, this post will only focus on obtain kernel leakage and not using this for exploitation
+
 ----
 
 ### DesktopHeap
