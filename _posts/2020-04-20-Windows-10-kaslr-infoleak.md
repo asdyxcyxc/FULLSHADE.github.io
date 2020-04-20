@@ -57,9 +57,9 @@ typedef struct _CLIENTINFO
 ```
 
 **Sources:**
-- https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html
-- https://reactos.org/wiki/Techwiki:Win32k/CLIENTINF 
-- https://github.com/55-AA/CVE-2016-3308
+- [1] https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html
+- [2] https://reactos.org/wiki/Techwiki:Win32k/CLIENTINF 
+- [3] https://github.com/55-AA/CVE-2016-3308
 
 ### NtQuerySystemInformation
 ### HMValidateHandle
