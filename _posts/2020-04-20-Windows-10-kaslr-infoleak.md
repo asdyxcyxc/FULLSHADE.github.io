@@ -25,11 +25,11 @@ The Windows desktop heap is used by win32k.sys to store objects associated with 
 - [1] [https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview](https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview)
 - [2] [https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf](https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf)
 
-For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure.
+For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure in order to leak kernel adresses from the user-mode mapped desktop heap.
 
 From within these various undocumented structures, there are a couple of very important structure members we will utilize and obtain information from. 
 
-The first important member is the `pvDesktopBase`  member from the  `_DESKTOPINFO` structure, which includes a pointer to the kernel address of the Desktop Heap. The second important structure member comes from the `_CLIENTINFO` and the `ulClientDelta` member specifies the offset between a userland image and the kernel address.
+The first important member is the `pvDesktopBase`  member from the  `_DESKTOPINFO` structure, which includes a pointer to the kernel address of the Desktop Heap. The second important structure member comes from the `_CLIENTINFO` and the `ulClientDelta` member specifies the offset between a userland image and the kernel address which can be used to compute the user-mode address of the desktop heap objects.
 
 The structure definitions for these undocumented structures come from the reactOS project, below you can see the structures that we will utilize being defined.
 
