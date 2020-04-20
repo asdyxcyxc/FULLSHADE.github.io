@@ -7,7 +7,7 @@ This post covers a few techniques to leak kernel addresses on a Windows 10 syste
 
 ----
 
-The code for this can all be found here - https://github.com/FULLSHADE/LEAKYDRIPPER
+The code for this can all be found here - [https://github.com/FULLSHADE/LEAKYDRIPPER](https://github.com/FULLSHADE/LEAKYDRIPPER)
 
 Over the years, Microsoft has implemented various security mitigation tactics within the Windows operating system to prevent and thwart malicious actors from leveraging various types of exploitation techniques to obtain higher levels of privilege than they are supposed to have.
 
@@ -22,8 +22,8 @@ This post will review a few of the various techniques (including POC code) that 
 The Windows desktop heap is used by win32k.sys to store objects associated with the current given desktop. Every desktop object has a desktop heap associated with it, these desktop heaps store certain objects, including Windows, menus, and also hooks. And when an application requires a user interface to one of these objects, various functions from user32.dll are called to allocate these objects.
 
 **Sources:**
-- [1] https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview
-- [2] https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf
+- [1] [https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview](https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview)
+- [2] [https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf](https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf)
 
 For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure.
 
