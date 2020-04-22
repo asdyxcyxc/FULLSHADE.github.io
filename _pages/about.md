@@ -7,13 +7,7 @@ header:
 permalink: /about.html
 ---
 
-My current specialty/hobby is Offensive Windows security research, Windows kernel exploitation, pentesting, and foreign intelligence APT threat analysis.
-
-I enjoy discovering and disclosing new 0day's through companies via responsible disclosure and building my vast CVE collection (*currently 25+*) via independent security research. I am also an avid CTF competitor, I attempt to compete weekly in a CTF competition to keep my skills and mind sharp. 
-
-Outside of the realm of security, I enjoy a good game of chess.
-
-Cheers!
+My specialty is Offensive Windows security research, Windows kernel exploitation, pentesting, and foreign intelligence APT threat analysis.
 
 ----
 
