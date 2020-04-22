@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "FullPwn Operations"
 title_separator          : "-"
-name                     : "FULLSHADE"
+name                     : "\z\x00^@%00U+2400"
 description              : "Offensive Security Research, Blogs, and Writeups"
 url                      : "https://fullshade.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -80,7 +80,7 @@ analytics:
 author:
   name             : "FULLSHADE"
   avatar           : "bio-photo2.jpg"
-  bio              : "OSCP | EJPT | SEC+ | 0day Hunter | Offensive Security Research"
+  bio              : "Welcome to my blog, unless you dabble in the dark arts of 0day hunting, your probably lost"
   location         : "United States"
   uri              :
   bitbucket        :
