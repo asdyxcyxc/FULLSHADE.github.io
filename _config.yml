@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "FullPwn Operations"
 title_separator          : "-"
-name                     : "\z\x00^@%00U+2400"
+name                     : "\\z\x00^@%00U+2400"
 description              : "Offensive Security Research, Blogs, and Writeups"
 url                      : "https://fullshade.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
