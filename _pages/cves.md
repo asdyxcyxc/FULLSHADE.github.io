@@ -7,7 +7,7 @@ header:
 permalink: /cves.html
 ---
 
-This page centralizes my personal collection of obtained CVE's.
+This page centralizes my personal collection of obtained CVE's. Proof-of-concepts may be found on my Github, exploit-db, or packetstorm pages.
 
 ----
 
