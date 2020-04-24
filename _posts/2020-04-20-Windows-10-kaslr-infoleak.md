@@ -19,7 +19,7 @@ Said kernel addresses may be combined with various exploitation tactics, this po
 
 ----
 
-### DesktopHeap
+### DesktopHeap (TEB.Win32ClientInfo)
 
 The Windows desktop heap is used by win32k.sys to store objects associated with the current given desktop. Every desktop object has a desktop heap associated with it, these desktop heaps store certain objects, including Windows, menus, and also hooks. And when an application requires a user interface to one of these objects, various functions from user32.dll are called to allocate these objects.
 
@@ -31,9 +31,7 @@ For this information leakage proof-of-concept, we will be utilizing the TEB (Thr
 
 From within these various undocumented structures, there are a couple of very important structure members we will utilize and obtain information from. 
 
-The first important member is the `pvDesktopBase`  member from the  `_DESKTOPINFO` structure, which includes a pointer to the kernel address of the Desktop Heap. The second important structure member comes from the `_CLIENTINFO` and the `ulClientDelta` member specifies the offset between a userland image and the kernel address which can be used to compute the user-mode address of the desktop heap objects.
-
-The structure definitions for these undocumented structures come from the reactOS project, below you can see the structures that we will utilize being defined.
+The first important member is the `pvDesktopBase`  member from the  `_DESKTOPINFO` structure, which includes a pointer to the kernel address of the Desktop Heap. The structure definitions for these undocumented structures come from the reactOS project, below you can see the structures that we will utilize being defined.
 
 ```c++
 typedef struct _DESKTOPINFO
@@ -43,6 +41,10 @@ typedef struct _DESKTOPINFO
 } DESKTOPINFO, *PDESKTOPINFO;
 ```
 - [Important] The `pvDesktopBase` member point to the kernel address of the desktop heap
+
+The second important structure member comes from the `_CLIENTINFO` and the `ulClientDelta` member specifies the offset between a userland image and the kernel address which can be used to compute the user-mode address of the desktop heap objects.
+
+The process environment block contains an undocumented structure that is called `Win32ClientInfo` ,  which is defined below
 
 ```c++
 typedef struct _CLIENTINFO
@@ -63,6 +65,11 @@ typedef struct _CLIENTINFO
 - [2] https://reactos.org/wiki/Techwiki:Win32k/CLIENTINF 
 - [3] https://github.com/55-AA/CVE-2016-3308
 
-### NtQuerySystemInformation
-### HMValidateHandle
-### Descriptor Tables
+We can calculate the user mode mapping of kernel-mode addresses which are located in the Desktop Heap by conducting a simple calculation. Once you obtain the `ulClientDelta` member you can then subtract it from the kernel-mode address which will then equal the user mode address 
+
+`UserModeAddress = KernelModeAddress – TEB.Win32ClientInfo.ulClientDelta`
+
+**Sources**
+- [1] http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html
+- [2] https://www.youtube.com/watch?v=PTnuwchEci0 (The lost video you didn't know existed...)
+
