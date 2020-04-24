@@ -3,11 +3,11 @@ layout: single
 title: Leaking Kernel Addresses on Windows 10 1607, 1703
 ---
 
-This post covers a technique to leak kernel addresses on a Windows 10 (RS1, RS2) system using C++. This post is also the compliment to the github repository which holds a few information leakage POCs that will soon be public.
-
-----
+This post covers a technique to leak kernel addresses on a Windows 10 (RS1, RS2) system using C++ & win32k.sys. This post is also the compliment to the github repository which holds a few information leakage POCs that will soon be public.
 
 The code for this can all be found here - [https://github.com/FULLSHADE/LEAKYDRIPPER](https://github.com/FULLSHADE/LEAKYDRIPPER)
+
+----
 
 Over the years, Microsoft has implemented various security mitigation tactics within the Windows operating system to prevent and thwart malicious actors from leveraging various types of exploitation techniques to obtain higher levels of privilege than they are supposed to have.
 
