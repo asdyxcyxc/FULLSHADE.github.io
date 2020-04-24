@@ -94,6 +94,14 @@ We can calculate the user mode mapping of kernel-mode addresses which are locate
 
 `UserModeAddress = KernelModeAddress – TEB.Win32ClientInfo.ulClientDelta`
 
+```c++
+	ULONG_PTR ulClientDelta = clientInfo->ulClientDelta;
+	PVOID pvDesktopBase = clientInfo->pDeskInfo->pvDesktopBase;
+    
+    // leak the kernel desktop heap base address
+    std::cout << "[+] Kernel Desktop heap base address: " << pvDesktopBase;
+```
+
 **Sources**
 - [1] http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html
 - [2] https://www.youtube.com/watch?v=PTnuwchEci0 (The lost video you didn't know existed...)
