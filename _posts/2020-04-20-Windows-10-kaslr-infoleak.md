@@ -1,6 +1,6 @@
 ---
 layout: single
-title: leaking Kernel Addresses on Windows 10 1607, 1703 with Win32k.sys 
+title: Leaking Kernel Addresses on Windows 10 1607, 1703 with Win32k.sys 
 ---
 
 THe year is 2020, but let's take a quick journey back to 2016, when Microsoft released the `Creators Update` aka, Windows 1607. This post covers a technique to leak kernel addresses on a Windows 10 (RS1, and RS2) system using C++ & win32k.sys. This post is also the compliment to the github repository which holds a few information leakage POCs that will soon be public.
