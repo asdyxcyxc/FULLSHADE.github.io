@@ -14,9 +14,6 @@ Warning! - in 1607 ther have been a few new mitigations, patches, and informatio
 ```
 1. Base addresses of Page Tables are now randomized
 2. Kernel addresses being leaked from GdiSharedHandleTable have also been removed
-3. 
-
-
 ```
 
 ----
