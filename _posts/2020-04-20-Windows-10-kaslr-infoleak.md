@@ -1,11 +1,23 @@
 ---
 layout: single
-title: Leaking Kernel Addresses on Windows 10 1607, 1703
+title: leaking Kernel Addresses on Windows 10 1607, 1703 with Win32k.sys 
 ---
 
 THe year is 2020, but let's take a quick journey back to 2016, when Microsoft released the `Creators Update` aka, Windows 1607. This post covers a technique to leak kernel addresses on a Windows 10 (RS1, and RS2) system using C++ & win32k.sys. This post is also the compliment to the github repository which holds a few information leakage POCs that will soon be public.
 
 The final code for this can all be found here - [https://github.com/FULLSHADE/LEAKYDRIPPER](https://github.com/FULLSHADE/LEAKYDRIPPER)
+
+----
+
+Warning! - in 1607 ther have been a few new mitigations, patches, and information leaks that have been patched, below are a few.
+
+```
+1. Base addresses of Page Tables are now randomized
+2. Kernel addresses being leaked from GdiSharedHandleTable have also been removed
+3. 
+
+
+```
 
 ----
 
@@ -21,13 +33,26 @@ Said kernel addresses may be combined with various exploitation tactics, this po
 
 ### DesktopHeap (TEB.Win32ClientInfo)
 
+![win32k.sys enters the room](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/doormeme.png)
+
 The Windows desktop heap is used by win32k.sys to store objects associated with the current given desktop. Every desktop object has a desktop heap associated with it, these desktop heaps store certain objects, including Windows, menus, and also hooks. And when an application requires a user interface to one of these objects, various functions from user32.dll are called to allocate these objects.
 
 **Sources:**
 - [1] [https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview](https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview)
 - [2] [https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf](https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf)
 
+With the Graphics Stack and win32k.sys, As soon as a GUI call is made, the function PsConvertToGuiThread is used, And this function recognizes this is a first call to something like the Windows manager or GDI, and now it's going to promote you with getting access to it. And it will switch you from the address table to the Shadow Address Table, which will give you access to the system calls.
+
+Switching it from `KeServiceDescriptorTable` to `KeServiceDescriptorTableShadow`
+
+You might know of these of be familar with this if you've ever done any kind of WIndows hooking, for example if you’ve ever dealt with hooking the system service dispatch table (SSDT)
+
+**Sources**
+- [1] https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/
+
 For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure in order to leak kernel adresses from the user-mode mapped desktop heap.
+
+After the GUI conversion (mentioned above) takes place, your TEB (Thread Envrioment Block) will be populated with the tagCLIENTINFO structure, which will now include kernel pointers and deltas, this is also including the user mode desktop Heap which is mapped in user mode and this also is now going to include the Delta to where the kernel address of the kernel Desktop Heap is located.
 
 From within these various undocumented structures, there are a couple of very important structure members we will utilize and obtain information from. 
 
