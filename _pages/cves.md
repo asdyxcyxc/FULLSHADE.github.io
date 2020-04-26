@@ -17,7 +17,7 @@ This page centralizes my personal collection of obtained CVE's. Proof-of-concept
 |:---|:--------|--------:|
 | 11 | [CVE-2020-12122](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CCVE-2020-12122) | DLL hijacking
 | 10 | [CVE-2020-12121](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12121) | Max Secure Max Spyware Detector DOS|
-| 9 | [CVE-2020-10234](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10234) | Epson EMPNSA.sys IOCTL corruption(DOS)|
+| 9 | [CVE-2020-10234](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10234) | Undisclosed [error]|
 | 8 | [CVE-2020-9453](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Epson EMPNSA.sys IOCTL corruption(DOS)|
 | 7 | [CVE-2020-9014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9014) | Epson EMPMAU.sys IOCTL corruption (DOS)|
 | 6 | [CVE-2020-5511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5511) | PHPGurukul Small CRM v2.0  SQL Injection |
