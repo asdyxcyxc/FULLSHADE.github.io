@@ -9,6 +9,8 @@ permalink: /cves.html
 
 This page centralizes my personal collection of obtained CVE's. Proof-of-concepts may be found on my Github, exploit-db, or packetstorm pages.
 
+You can find my personal disclosure policy on the bottom of this page.
+
 ----
 
 ### 2020  - CVE Discoveries ###
