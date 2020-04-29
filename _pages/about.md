@@ -15,11 +15,11 @@ My specialty is Offensive Windows security research, Windows kernel exploitation
 
 - Offensive Security Certified Professional (OSCP)
 - eLearnSecurity Junior Penetration Tester (eJPT)
+- CompTIA CYSA+
 - CompTIA Security+
 
 [In-Progress]
 
-- CompTIA CYSA+
 - Splunk Core Certified User
 - SLAE
 
