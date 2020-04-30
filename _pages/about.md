@@ -20,6 +20,8 @@ My specialty is Offensive Windows security research, Windows kernel exploitation
 
 [In-Progress]
 
+- CISSP
+- Offensive Security Exploitation Expert (OSEE)
 - Splunk Core Certified User
 - SLAE
 
