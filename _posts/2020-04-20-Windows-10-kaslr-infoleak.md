@@ -107,7 +107,7 @@ You can use the `NtCurrentTeb` function to pull the current processes TEB, and n
 ```
 This comes from Morten Schenks DEFCON talk
 
-![mortens talk](https://github.com/FULLSHADE/FULLSHADE.github.io/blob/master/static/img/_posts/mortenstalk1.png)
+![mortens - talk](https://github.com/FULLSHADE/FULLSHADE.github.io/blob/master/static/img/_posts/mortenstalk1.png)
 
 Once you have this set up you can now use the provided formula to calculate out the various kernel addresses.
 
