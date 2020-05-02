@@ -83,7 +83,7 @@ The thread environment block contains an undocumented member that is called `Win
 
 You can use WinDBG to spot this at TEB+800.
 
-![in windbg](https://github.com/FULLSHADE/FULLSHADE.github.io/blob/master/static/img/_posts/inWindbg.png)
+![in windbg](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/inWindbg.png)
 
 We can define this structure to include the Win32ClientInfo for future use. The [0x3E] within our structure definition is reflated to the value within it being a member in the TEB, 3E = 62 in hex, and you can see that in the above WinDBG output image.
 
