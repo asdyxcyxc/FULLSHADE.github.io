@@ -96,7 +96,7 @@ typedef struct _TEB {
 
 **Sources:**
 - [1] ![https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html](https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html)
-- [2] ![https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO](https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO
+- [2] ![https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO](https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO)
 - [3] ![https://github.com/55-AA/CVE-2016-3308](https://github.com/55-AA/CVE-2016-3308)
 
 We can calculate the kernel addresses from the user-mode mapping of the desktop heap. Once you obtain the `ulClientDelta` member you can then combine it with a simple calculation to extract the various members and obtain the final kernel addresses.
