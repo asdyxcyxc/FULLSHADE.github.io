@@ -42,7 +42,7 @@ With the Graphics Stack and win32k.sys, As soon as a GUI call is made, the funct
 
 Switching it from `KeServiceDescriptorTable` to `KeServiceDescriptorTableShadow`
 
-You might know of these of being familiar with this if you've ever done any kind of WIndows hooking, for example, if you’ve ever dealt with hooking the system service dispatch table (SSDT)
+You might know of these of being familiar with this if you've ever done any kind of Windows hooking, for example, if you’ve ever dealt with hooking the system service dispatch table (SSDT)
 
 **Sources**
 - [1] https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/
