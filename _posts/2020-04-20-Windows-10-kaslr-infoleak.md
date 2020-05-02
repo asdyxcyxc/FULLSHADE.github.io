@@ -45,7 +45,7 @@ Switching it from `KeServiceDescriptorTable` to `KeServiceDescriptorTableShadow`
 You might know of these of being familiar with this if you've ever done any kind of Windows hooking, for example, if you’ve ever dealt with hooking the system service dispatch table (SSDT)
 
 **Sources**
-- [1] ![https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/](https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/)
+- [1] [https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/](https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/)
 
 For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure to leak kernel addresses from the user-mode mapped desktop heap.
 
@@ -95,9 +95,9 @@ typedef struct _TEB {
 ```
 
 **Sources:**
-- [1] ![https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html](https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html)
-- [2] ![https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO](https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO)
-- [3] ![https://github.com/55-AA/CVE-2016-3308](https://github.com/55-AA/CVE-2016-3308)
+- [1] [https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html](https://doxygen.reactos.org/dd/d79/include_2ntuser_8h_source.html)
+- [2] [https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO](https://reactos.org/wiki/Techwiki:Win32k/CLIENTINFO)
+- [3] [https://github.com/55-AA/CVE-2016-3308](https://github.com/55-AA/CVE-2016-3308)
 
 We can calculate the kernel addresses from the user-mode mapping of the desktop heap. Once you obtain the `ulClientDelta` member you can then combine it with a simple calculation to extract the various members and obtain the final kernel addresses.
 
@@ -139,9 +139,9 @@ And then you can cout them to view the various (now) leaked kernel addresses.
 We can use the user-mode mapped DesktopHeap combined with a few undocumented aspects of some data structures to leak various kernel addresses, these addresses can now be combined with a w^r primitive to bypass KASLR and locate and calculate kernel addresses (like taking an arbitrary write primitive and using these addresses to calculate the HAL table to create a classic WWW)
 
 **Sources**
-- [1] ![http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html](http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html)
-- [2] ![https://www.youtube.com/watch?v=PTnuwchEci0](https://www.youtube.com/watch?v=PTnuwchEci0) (The lost video you didn't know existed...)
-- [3] ![https://www.youtube.com/watch?v=Gu_5kkErQ6Y](https://www.youtube.com/watch?v=Gu_5kkErQ6Y) (Morten Schenk - Taking Windows 10 Kernel Exploitation to the next level)
+- [1] [http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html](http://cvr-data.blogspot.com/2016/11/lpe-vulnerabilities-exploitation-on.html)
+- [2] [https://www.youtube.com/watch?v=PTnuwchEci0](https://www.youtube.com/watch?v=PTnuwchEci0) (The lost video you didn't know existed...)
+- [3] [https://www.youtube.com/watch?v=Gu_5kkErQ6Y](https://www.youtube.com/watch?v=Gu_5kkErQ6Y) (Morten Schenk - Taking Windows 10 Kernel Exploitation to the next level)
 
 ----
 
