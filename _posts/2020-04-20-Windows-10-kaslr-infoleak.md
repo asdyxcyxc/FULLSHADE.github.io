@@ -30,7 +30,7 @@ Said kernel addresses may be combined with various exploitation tactics, this po
 
 ### DesktopHeap (TEB.Win32ClientInfo)
 
-![win32k.sys enters the room](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/doormeme.png)
+![windows versions](https://raw.githubusercontent.com/FULLSHADE/LEAKYDRIPPER/master/images/winVersions.png)
 
 The Windows desktop heap is used by win32k.sys to store objects associated with the current given desktop. Every desktop object has a desktop heap associated with it, these desktop heaps store certain objects, including Windows, menus, and also hooks. And when an application requires a user interface to one of these objects, various functions from user32.dll are called to allocate these objects.
 
