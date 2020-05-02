@@ -105,9 +105,9 @@ You can use the `NtCurrentTeb` function to pull the current processes TEB, and n
     PTEB pTeb = NtCurrentTeb();
     PCLIENTINFO clientInfoStruct = (PCLIENTINFO)pTeb->Win32ClientInfo;
 ```
-This comes from Morten Shencks DEFCON talk
+This comes from Morten Schenks DEFCON talk
 
-![mortens talk](https://github.com/FULLSHADE/FULLSHADE.github.io/blob/master/static/img/_posts/morten-talk-win10-1607.png)
+![mortens talk](https://github.com/FULLSHADE/FULLSHADE.github.io/blob/master/static/img/_posts/mortenstalk1)
 
 Once you have this set up you can now use the provided formula to calculate out the various kernel addresses.
 
@@ -124,6 +124,9 @@ And then you can cout them to view the various (now) leaked kernel addresses.
     std::cout << "\t[>] Kernel Desktop base address  : " << pvDesktopBase << std::endl;
     std::cout << "\t[>] Kernel Desktop limit address : " << pvDesktopLimit << std::endl;
 ```
+
+![leaked](https://raw.githubusercontent.com/FULLSHADE/LEAKYDRIPPER/master/images/DesktopHeapLeak.png)
+
 
 **Conclusion**
 
