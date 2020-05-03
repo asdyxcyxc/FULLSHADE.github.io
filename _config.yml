@@ -1,6 +1,6 @@
 # Site Settings
 locale                   : "en-US"
-title                    : "FullPwn Operations"
+title                    : "FullPwn Security Operations"
 title_separator          : "-"
 name                     : "\\z\x00^@%00U+2400"
 description              : "Offensive Security Research, Blogs, and Writeups"
@@ -66,14 +66,13 @@ social:
 analytics:
   provider               : "google" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id          : "UA-85282217-1"
 
 
 # Site Author
 author:
-  name             : "FULLSHADE"
+  name             : "\\z\x00^@%00U+2400"
   avatar           : "bio-photo2.jpg"
-  bio              : "Offensive security research | Kernel fuzzing | OSCP"
+  bio              : "Offensive security research | OSCP | Kernel fuzzing | Windows Internals"
   location         : "United States"
   uri              :
   bitbucket        :
