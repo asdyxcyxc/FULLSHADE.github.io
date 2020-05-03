@@ -38,7 +38,7 @@ The Windows desktop heap is used by win32k.sys to store objects associated with 
 - [1] [https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview](https://docs.microsoft.com/en-us/archive/blogs/ntdebugging/desktop-heap-overview)
 - [2] [https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf](https://media.blackhat.com/bh-us-11/Mandt/BH_US_11_Mandt_win32k_WP.pdf)
 
-With the Graphics Stack and win32k.sys, As soon as a GUI call is made, the function PsConvertToGuiThread is used, And this function recognizes this is the first call to something like the Windows manager or GDI, and now it's going to promote you with getting access to it. And it will switch you from the address table to the Shadow Address Table, which will give you access to the system calls.
+With the Graphics Stack and win32k.sys, As soon as a GUI call is made, the function `PsConvertToGuiThread` function is used, and this function recognizes this is the first call to something like the Windows manager or GDI, and it's going to promote you with getting access to it. And it will switch you from the address table to the Shadow Address Table, which will give you access to the system calls.
 
 Switching it from `KeServiceDescriptorTable` to `KeServiceDescriptorTableShadow`
 
@@ -49,7 +49,7 @@ You might know of these of being familiar with this if you've ever done any kind
 
 For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure to leak kernel addresses from the user-mode mapped desktop heap.
 
-After the GUI conversion (mentioned above) takes place, your TEB (Thread Environment Block) will be populated with the tagCLIENTINFO structure, which will now include kernel pointers and deltas, this is also including the user mode desktop Heap which is mapped in user mode and this also is now going to include the Delta to where the kernel address of the kernel Desktop Heap is located.
+After the GUI conversion (mentioned above) takes place, your TEB (Thread Environment Block) will be populated with the `tagCLIENTINFO` structure, which will now include kernel pointers and deltas, this is also including the user mode desktop Heap which is mapped in user mode and this also is now going to include the Delta to where the kernel address of the kernel Desktop Heap is located.
 
 From within these various undocumented structures, there are a couple of very important structure members we will utilize and obtain information from. 
 
