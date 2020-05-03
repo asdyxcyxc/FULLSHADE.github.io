@@ -11,6 +11,13 @@ This post will review a few of the various techniques (including POC code) that 
 
 Said kernel addresses may be combined with various exploitation tactics, this post will only focus on obtaining kernel leakage and not using this for exploitation, if an attacker needs to bypass KASLR, they can use these addresses to calculate other areas addresses or use this 
 
+
+### Note 
+
+This post will utilize various kernel address leakage vulnerabilities that only require a **low-integrity** level. There is the highly documented and used `NtQuerySystemInformation` API, but it requires at least a **medium-integrity** level to execute. If the execution context is at a low level, or you're within an application sandbox, these few leaks are for you.
+
+This post will only be covering one leak per Windows version, as there are many dozens of different techniques, this post will cover a few favorite leaks.
+
 ----
 
 ### Windows 10 1607 kernel information leakage
