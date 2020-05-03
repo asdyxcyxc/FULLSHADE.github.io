@@ -166,3 +166,7 @@ We can use the user-mode mapped DesktopHeap combined with a few undocumented asp
 ----
 
 ### Windows 10 1703 kernel information leakage
+
+----
+
+### Windows 10 1809 kernel information leakage
