@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Leaking Kernel Addresses on Windows 10 1607, 1703 with Win32k.sys - undocumented structures to circumvent KASLR
+title: Leaking Kernel Addresses on Windows 10 1607 with Win32k.sys - undocumented structures to bypass KASLR
 ---
 
 The year is 2020, but let's take a quick journey back to 2016 when Microsoft released the `Creators Update` aka, Windows 1607. This post covers a few different techniques to leak kernel addresses on a Windows 10 (RS1, and RS2) system using C++ & win32k.sys (and some others). This post is also the complement to the Github repository which holds a few information leakage POCs that will soon be public.
