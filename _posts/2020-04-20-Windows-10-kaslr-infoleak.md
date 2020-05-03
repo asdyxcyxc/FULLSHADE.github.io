@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Leaking Kernel Addresses on Windows 10 1607, 1703, and 1809 with Win32k.sys - undocumented structures to bypass KASLR
+title: Leaking Kernel Addresses on Windows 10 1607, 1703, and 1809 - undocumented structures to bypass KASLR
 ---
 
 ### Windows 10 1607 kernel information leakage
