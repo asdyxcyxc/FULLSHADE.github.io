@@ -1,6 +1,6 @@
 ---
 layout: single
-title: HEVD - Windows 8.1 64-bit Stack Overflow w/ SMEP bypass
+title: HEVD - Windows 8.1 64-bit Kernel Stack Overflow with ROP to bypass SMEP - flipping the CR4.SMEP bit
 ---
 
 Walkthrough for exploiting the HEVD Windows Kernel Driver. This post covers exploiting a Stack-based vulnerability on Windows 8.1 which also includes a full SMEP (Supervisor Mode Execution Prevention) mitigation bypass via a ROP chain.
