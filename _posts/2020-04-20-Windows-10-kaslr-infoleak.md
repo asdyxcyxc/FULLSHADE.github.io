@@ -3,6 +3,16 @@ layout: single
 title: Leaking Kernel Addresses on Windows 10 1607, 1703, and 1809 - undocumented structures to bypass KASLR
 ---
 
+Over the years, Microsoft has implemented various security mitigation tactics within the Windows operating system to circumvent and thwart malicious actors from leveraging various types of exploitation techniques to obtain higher levels of privilege than they are supposed to have.
+
+One of the security mitigations that has been implemented is known as **KASLR** (Kernel Address Space Layout/Load Randomization). KASLR makes windows kernel exploitation extremely difficult in the sense that it makes it almost impossible for attackers to obtain the Base address of the Windows kernel. Over the years security researchers and hackers alike have learned to bypass this via developing various types of information leakage vulnerabilities to take advantage of various aspects of the windows kernel to be able to leak the kernel addresses. 
+
+This post will review a few of the various techniques (including POC code) that can be used to leak some windows kernel addresses on a **Windows 10 1607, 1703, and 1809** build.
+
+Said kernel addresses may be combined with various exploitation tactics, this post will only focus on obtaining kernel leakage and not using this for exploitation, if an attacker needs to bypass KASLR, they can use these addresses to calculate other areas addresses or use this 
+
+----
+
 ### Windows 10 1607 kernel information leakage
 
 The year is 2020, but let's take a quick journey back to 2016 when Microsoft released the `Creators Update` aka, Windows 1607. This post covers a few different techniques to leak kernel addresses on a Windows 10 (Redstone 1) system using C++ & win32k.sys. This post is also the complement to the Github repository which holds a few information leakage POCs for a few public bugs that I will be covering here.
@@ -17,18 +27,6 @@ Warning! - in 1607 there have been a few new mitigations, patches, and informati
 1. Base addresses of Page Tables are now randomized
 2. Kernel addresses being leaked from GdiSharedHandleTable have also been removed
 ```
-
-----
-
-#### Microsoft mitigation implementation
-
-Over the years, Microsoft has implemented various security mitigation tactics within the Windows operating system to circumvent and thwart malicious actors from leveraging various types of exploitation techniques to obtain higher levels of privilege than they are supposed to have.
-
-One of the security mitigations that has been implemented is known as KASLR (Kernel Address Space Layout/Load Randomization). KASLR makes windows kernel exploitation extremely difficult in the sense that it makes it almost impossible for attackers to obtain the Base address of the Windows kernel. Over the years security researchers and hackers alike have learned to bypass this via developing various types of information leakage vulnerabilities to take advantage of various aspects of the windows kernel to be able to leak the kernel addresses. 
-
-This post will review a few of the various techniques (including POC code) that can be used to leak some windows kernel addresses on a **Windows 10 1607** and a **1703** build.
-
-Said kernel addresses may be combined with various exploitation tactics, this post will only focus on obtaining kernel leakage and not using this for exploitation, if an attacker needs to bypass KASLR, they can use these addresses to calculate other areas addresses or use this 
 
 ----
 
