@@ -2,8 +2,6 @@
 locale                   : "en-US"
 title                    : "FullPwn Security Operations"
 title_separator          : "-"
-name                     : "\\z\x00^@%00U+2400"
-description              : "Offensive Security Research, Blogs, and Writeups"
 url                      : "https://fullshade.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "FULLSHADE/FULLSHADE.github.io"
@@ -14,7 +12,6 @@ minimal_mistakes_skin: "dirt" # "air", "aqua", "contrast", "dark", "dirt", "neon
 comments:
   provider               : "disqus"
   disqus:
-    shortname            : "F.P.O"
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
@@ -70,7 +67,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "ShadedSec"
+  name             : "Fu11Shade"
   avatar           : "bio-photo2.jpg"
   bio              : "Offensive security research | OSCP | Kernel fuzzing | Windows Internals"
   location         : "United States"
