@@ -1,7 +1,9 @@
 ---
 layout: single
-title: Leaking Kernel Addresses on Windows 10 1607 with Win32k.sys - undocumented structures to bypass KASLR
+title: Leaking Kernel Addresses on Windows 10 1607, 1703, and 1809 with Win32k.sys - undocumented structures to bypass KASLR
 ---
+
+### Windows 10 1607 kernel information leakage
 
 The year is 2020, but let's take a quick journey back to 2016 when Microsoft released the `Creators Update` aka, Windows 1607. This post covers a few different techniques to leak kernel addresses on a Windows 10 (Redstone 1) system using C++ & win32k.sys. This post is also the complement to the Github repository which holds a few information leakage POCs for a few public bugs that I will be covering here.
 
@@ -30,7 +32,7 @@ Said kernel addresses may be combined with various exploitation tactics, this po
 
 ----
 
-### DesktopHeap (TEB.Win32ClientInfo) information leakage
+#### DesktopHeap (TEB.Win32ClientInfo) information leakage
 
 To aid in the bypass of KASLR, you will need a to combine an information leakage bug with your exploit in order to obtain kernel addresses so you can locate other various structures (example: turning an arbitrary write into a classic WWW)
 
@@ -51,7 +53,7 @@ You might know of these of being familiar with this if you've ever done any kind
 **Sources**
 - [1] [https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/](https://resources.infosecinstitute.com/hooking-system-service-dispatch-table-ssdt/)
 
-### Critical information
+#### Critical information
 
 And for each GUI thread, win32k maps the associated desktop heap int the user-mode process, thus creating a bridge into kernel mode. And the information about a desktop heap is stored in the desktop information structure `_DESKTOPINFO`. This `_DESKTOPINFO` structure holds various kernel addresses of the desktop heap which are now accessible from user-mode. 
 
@@ -63,7 +65,7 @@ kd> dt win32k!tagDESKTOPINFO
 
 Our goal is to query both of these kernel addresses for our leakage.
 
-### Exploitation
+#### Putting it all together
 
 For this information leakage proof-of-concept, we will be utilizing the TEB (Thread Environment Block) along with various undocumented Windows structures, such as the `_DESKTOPINFO` structure, and the `_CLIENTINFO` structure to leak kernel addresses from the user-mode mapped desktop heap.
 
@@ -154,7 +156,7 @@ And now for the finale you can cout them to view the various (now) leaked kernel
 
 ![leaked](https://raw.githubusercontent.com/FULLSHADE/LEAKYDRIPPER/master/images/DesktopHeapLeak.png)
 
-**Conclusion**
+#### Conclusion
 
 We can use the user-mode mapped DesktopHeap combined with a few undocumented aspects of some data structures to leak various kernel addresses, these addresses can now be combined with a w^r primitive to bypass KASLR and locate and calculate kernel addresses (like taking an arbitrary write primitive and using these addresses to calculate the HAL table to create a classic WWW)
 
@@ -164,3 +166,5 @@ We can use the user-mode mapped DesktopHeap combined with a few undocumented asp
 - [3] [https://www.youtube.com/watch?v=Gu_5kkErQ6Y](https://www.youtube.com/watch?v=Gu_5kkErQ6Y) (Morten Schenk - Taking Windows 10 Kernel Exploitation to the next level)
 
 ----
+
+### Windows 10 1703 kernel information leakage
