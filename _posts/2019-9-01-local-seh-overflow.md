@@ -53,7 +53,7 @@ This will create a unique cyclic pattern that will allow you to spot and calcula
 
 Include this string in your exploit, and run it all through Immunity again, when it crashes this time, use the `!mona findmsp` command to locate any overwritten SEH locations and registers, and see where they have been overwritten.
 
-[local seh 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh6.png)
+![local seh 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh6.png)
 
 In order to actually exploit this, you need to obtain a POP POP RET  gadget, this can be done with MONA.py  via the !seh -n  command. The POP POP RET sequence will be overwriting the NSEH (next structured exception handler in the SEH chain)
 
