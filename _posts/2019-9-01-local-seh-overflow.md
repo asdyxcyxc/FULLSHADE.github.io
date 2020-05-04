@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Local SEH overflow exploitation - Millenium MP3 Studio 2.0
+title: Local SEH overflow - exploitation of Millenium MP3 Studio 2.0 with a calc.exe shellcode payload
 ---
 
 **Getting started**
