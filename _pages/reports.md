@@ -4,7 +4,7 @@ author_profile: true
 title: Windows exploitation
 header:
   overlay_image: blog-cover.jpg
-permalink: /security-reports.html
+permalink: /windows-exploitation-pathway.html
 ---
 
 This page provides a pathway for learning Windows exploit development, following the provided blog posts will allow you to learn Windows exploitdevelop from the basics, to advanced kernel exploitation on a Windows 10 system.
