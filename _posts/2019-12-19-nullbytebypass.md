@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Null byte POP POP RET DLL injection bypass technique
+title: Proposed technique for bypassing a NULL byte when using a POPPOPRET - SEH explotiation
 ---
 
 A method to bypass a null byte only series of POP-POP-RETN address produced by Mona.py for exploiting local SEH overflows via DLL injection.
