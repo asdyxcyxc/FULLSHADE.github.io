@@ -3,7 +3,7 @@ layout: single
 title: Set up Immunity and WinDBG with Mona.py, set up a kernel debugging environment with WinDBG
 ---
 
-#### Set up Immunity Debugger with Mona.py
+### Set up Immunity Debugger with Mona.py
 
 Immunity Debugger can be downloaded from https://www.immunityinc.com/products/debugger/when downloading it, you need to provide some basic information, your name, company, and so forth. After downloading Immunity Debugger from its host site run the installer. It may need to install Python when you first run it.
 
@@ -19,7 +19,7 @@ You can use the help command to get more information about specific commands wit
 
 ----
 
-#### Set up WinDBG with Mona.py
+### Set up WinDBG with Mona.py
 
 WinDBG is a very powerful debugging tool for Windows, it’s also the debugger that this guide
 will utilize the majority of the time. The Windows Debugger (WinDBG) can be used for both
@@ -60,7 +60,7 @@ commands in the command line box on the bottom.
 
 ![setup4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin4.png)
 
-**Add the mona.py extension**
+### Add the mona.py extension
 
 Now let’s add mona.py to WinDBG to enable our full exploit-developer potential. In order to do
 so, you can visit https://github.com/corelan/windbglib to download “windbglib” which is a
@@ -97,5 +97,5 @@ is just !py mona instead of just !mona.
 
 ----
 
-#### Set up a kernel debugging enviroment with WinDBG
+### Set up a kernel debugging enviroment with WinDBG
 
