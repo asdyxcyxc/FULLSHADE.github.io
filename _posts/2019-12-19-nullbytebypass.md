@@ -3,9 +3,9 @@ layout: single
 title: Proposed technique for bypassing a NULL byte when using a POPPOPRET - SEH explotiation
 ---
 
-A method to bypass a null byte only series of POP-POP-RETN address produced by Mona.py for exploiting local SEH overflows via DLL injection.
+Just as clarification, why???????????  would you want to do this? If you've ever encountered structured exception handler buffer overflow proof of concepts on exploit-db. And it is not complete, and they are only proving a DOS exploitation. And for some reason you want to prove the full exploitability of the vulnerability that you find. You can use this dll injection technique to add custom code  to be utilized for your vulnerability exploitation. It’s really not practical, but it’s just a thought. Also, If you are using this technique in order to write your exploits, you are already at a level where you can manipulate and execute code in another process is memory, so this isn't really a practical approach to write in exploit. But if you just want to write and fully exploit an application, this proves as a very impractical technique to do so.
 
-[Whitepaper publication](https://www.exploit-db.com/docs/47833)
+[Whitepaper publication](https://www.exploit-db.com/docs/47833) <- lol
 
 ----
 
