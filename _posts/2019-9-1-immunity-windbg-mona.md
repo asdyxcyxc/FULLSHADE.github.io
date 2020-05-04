@@ -7,7 +7,7 @@ title: Set up Immunity and WinDBG with Mona.py, set up a kernel debugging enviro
 
 Immunity Debugger can be downloaded from https://www.immunityinc.com/products/debugger/when downloading it, you need to provide some basic information, your name, company, and so forth. After downloading Immunity Debugger from its host site run the installer. It may need to install Python when you first run it.
 
-![setup1](setupImunWin1.png)
+![setup1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin1.png)
 
 Add the mona.py extension for future exploitation simplification, you will need a copy of the Mona.py extension, this extension will help you automate your exploitation further down the road. You can download Mona.py from the official Corelan repository on Github found here. You will need to download the mona.py file and load it into Immunity debugger, this can be done by adding the extension to the `PyCommands` folder where you installed Immunity Debugger. 
 
@@ -15,7 +15,7 @@ By default Immunity should be installed at C:\Program Files\Immunity Inc\Immunit
 
 You can use the help command to get more information about specific commands with the syntax - !mona help<command>, the full mona.py tutorial can be found on the official Corelan website here.
 
-![setup2](setupImunWin2.png)
+![setup2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin2.png)
 
 ----
 
@@ -36,7 +36,7 @@ WinDBG.
 When going through the installer, follow all the default options, but you may want to deselect
 everything besides “Debugging tools” when you have the option, this will allow you to onlydownload WinDBG and debugging tools.
 
-![setup3](setupImunWin3.png)
+![setup3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin3.png)
 
 Installing WinDBG will also require the .Net framework tailored for your Windows version, just
 follow all the default popups and installation that it gives you.
@@ -58,9 +58,10 @@ the top bar or F5 to allow the application to run again. You will get used to se
 toexamine things throughout your debugging. When the debugger is running, you cannot run new
 commands in the command line box on the bottom.
 
-![setup4](setupImunWin4.png)
+![setup4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin4.png)
 
-Add the mona.py extension
+**Add the mona.py extension**
+
 Now let’s add mona.py to WinDBG to enable our full exploit-developer potential. In order to do
 so, you can visit https://github.com/corelan/windbglib to download “windbglib” which is a
 wrapper for pykd.pyd for WinDBG that allows you to utilize mona.py as a Python command
@@ -89,7 +90,7 @@ WinDBG installation folder. Just click > Open file location on your WinDBG icon 
 the winext folder. Once you have mona.py loaded into WinDBG after following the steps above,
 we can use the !py mona command to run any mona.py commands.
 
-![setup5](setupImunWin5.png)
+![setup5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupImunWin5.png)
 
 You can now use mona.py within WinDBG just like you would use it with Immunity. The syntax
 is just !py mona instead of just !mona.
