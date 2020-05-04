@@ -46,3 +46,8 @@ This page provides a pathway for learning Windows exploit development, following
 | 19 | [Leaking Kernel Addresses on Windows 10](https://fullpwnops.com/Windows-10-kaslr-infoleak/) | FullShade |
 | 20 | [Abusing GDI Bitmap objects on Windows 10](https://fullpwnops.com/gdi-exploitation/) | FullShade |
 
+Once you have enough Windows exploitation knowledge, you can start auditing third-party drivers for 0day vulnerabilities, below are a few that have been discovered with this level of information.
+
+#### Windows exploits
+
+- https://fullpwnops.com/cves.html
