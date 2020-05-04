@@ -99,3 +99,20 @@ is just !py mona instead of just !mona.
 
 ### Set up a kernel debugging enviroment with WinDBG
 
+This section is for later on when you get into kernel exploitation, within your kernel debugging environment you will have your host debugger, and the victim debugee. You can set this up by creating a single virtual machine, and then creating a linked clone of it. On the original machine you will have WinDBG. Act as the host debugger. 
+
+![both machines](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupdebug1.png)
+
+You can set up a virtual Serial port to connect the machines, the options should be matching as seen below. 
+
+![serial ports](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupdebug2.png)
+
+With kernel exploitation, you will run your kernel exploits on the victim machine, and the host debugger machine will have the ability to stop and pause the entire victim operating system. Compared to normal debugging, where you have the ability to pause and set breakpoints in a normal application, you can do that but on an entire system scale.
+
+Once this is set up you start the host debugger machine first, and set the kernel debugging -> COM port in WinDBG, then start your victim machine, on boot you want to select the kernel debugging mode.
+
+![boot mode](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupdebug3.png)
+
+Now you can see your victim machine connects to the host WinDBG machine, and your kernel debugging envrioment is set up.
+
+![final image](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupdebug4.png)
