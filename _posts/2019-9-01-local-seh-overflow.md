@@ -7,7 +7,7 @@ title: Local SEH overflow exploitation - Millenium MP3 Studio 2.0
 
 Start by attaching an immunity debugger to the running MP3 Studio process.
 
-![local seh 1](localseh1.png)
+![local seh 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh1.png)
 
 The basic concept for exploiting a local Structured Exception Handler based buffer overflow, is that you will create a malicious text file that includes the payload that you were going to manually enter into a vulnerable input field, or instead of a text file, you will generate a malicious payload embedded within something other than a text file, for example this target application includes a buffer overflow when parsing certain types of data files, with an .mpf file extension, we will generate our malicious payload.
 
@@ -33,17 +33,17 @@ except:
 
 After running the newly-created script, you can now open this malicious .mpf  File in the MP3 Studio application, while the MP3 Studio application is still attached to immunity to bugger. Now you should be able to witness the buffer overflow vulnerability Being triggered, and you should experience an exception crash.
 
-![local seh 2](localseh2.png)
+![local seh 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh2.png)
 
 If you look at the stack panel within Immunity, you can see the malicious payload has been written on to the stack.
 
-![local seh 3](localseh2.png)
+![local seh 3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh3.png)
 
 In order to actually exploit this, you need to obtain a POP POP RET  gadget, this can be done with MONA.py  via the !seh -n  command.
 
 Running this command will search through the program for the needed sequence, this sequence will return execution flow back to the structured exception Handler, the goal is to overwrite both the exception Handler and the next structured exception Handler. 
 
-![local seh 4](localseh4.png)
+![local seh 4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh4.png)
 
 And the next structured exception Handler will be overwritten with this sequence that we discover, returning normal flow back to the user-controlled structured exception Handler, which you can then add a short jump over the next structure exception Handler, which then jumps into a NOP sled and to your final shellcode payload
 
@@ -105,4 +105,4 @@ except:
 
 Now you can pop a calculator through this local SEH overflow.
 
-![local seh 5](localseh5.png)
+![local seh 5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh5.png)
