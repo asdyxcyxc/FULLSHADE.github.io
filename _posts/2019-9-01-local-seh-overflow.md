@@ -35,9 +35,13 @@ After running the newly-created script, you can now open this malicious .mpf  Fi
 
 ![local seh 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh2.png)
 
+If you don't see the SEH chain handlers getting overwritten, try adjusting your payload size, this is the one *advantage* of fuzzing, but due to this exploit being trivial, we don't need to involve any complex fuzzers to find a proper payload size, it can be done manually/
+
 If you look at the stack panel within Immunity, you can see the malicious payload has been written on to the stack.
 
 ![local seh 3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh3.png)
+
+After adjusting the payload size down to 5000 bytes, now you can see if crashes, and also starts overwriting everything.
 
 A few registers are also showing signs of being hit, but most importantly, the SEH handler tab shows you that both the SEH and NSEH have been both overwritten. This is the most important.
 
