@@ -5,11 +5,13 @@ title: Local SEH overflow exploitation - Millenium MP3 Studio 2.0
 
 **Getting started**
 
+The victim program for this walkthrough is `Millenium MP3 Studio 2.0`, it includes a local SEH based buffer overflow what opening cert sized files with certain file extensions.
+
 Start by attaching an immunity debugger to the running MP3 Studio process.
 
 ![local seh 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh1.png)
 
-The basic concept for exploiting a local Structured Exception Handler based buffer overflow, is that you will create a malicious text file that includes the payload that you were going to manually enter into a vulnerable input field, or instead of a text file, you will generate a malicious payload embedded within something other than a text file, for example this target application includes a buffer overflow when parsing certain types of data files, with an .mpf file extension, we will generate our malicious payload.
+The basic concept for exploiting a local Structured Exception Handler based buffer overflow, is that you will create a malicious text file that includes the payload that you are going to manually enter into a vulnerable input field, or instead of a text file, you will generate a malicious payload embedded within something other than a text file, for example this target application includes a buffer overflow when parsing certain types of data files, with an .mpf file extension, we will generate our malicious payload.
 
 We can start the exploitation process by creating a basic python script that opens up a new file, and inputs a large buffer of data into it.
 
@@ -41,15 +43,20 @@ If you look at the stack panel within Immunity, you can see the malicious payloa
 
 In order to actually exploit this, you need to obtain a POP POP RET  gadget, this can be done with MONA.py  via the !seh -n  command.
 
-Running this command will search through the program for the needed sequence, this sequence will return execution flow back to the structured exception Handler, the goal is to overwrite both the exception Handler and the next structured exception Handler. 
+Running this command will search through the program for the needed sequence, this POPPOPRET sequence will return execution flow back to the structured exception Handler, the goal is to overwrite both the exception Handler and the next structured exception Handler. 
 
 ![local seh 4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh4.png)
 
-And the next structured exception Handler will be overwritten with this sequence that we discover, returning normal flow back to the user-controlled structured exception Handler, which you can then add a short jump over the next structure exception Handler, which then jumps into a NOP sled and to your final shellcode payload
+And the next structured exception Handler will be overwritten with this sequence that we discover, returning normal flow back to the user-controlled structured exception Handler.
+
+Which you can then add a short jump over the next structure exception Handler, which then jumps into a NOP sled and to your final shellcode payload
+
+Run these new addresses through struct.pack in order to arrange them properly with little endian format.
+
 
 The last important thing to do before actually constructing the final bits of this exploit, is to use the Metasploit pattern_create and pattern_offset tool in order to calculate the buffer size that you're triggering with this buffer overflow vulnerability
 
-```
+```python
 from struct import *
 
 malicious_file = "evil.mpf"
