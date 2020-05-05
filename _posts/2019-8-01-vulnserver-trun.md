@@ -109,3 +109,5 @@ expl.close()
 Now when you re-send your exploit to the application, you can see the EIP register is now 42424242, which is our 4 B's send after our A's, we control the EIP register!
 
 Now that we can control what address get's executed next, we want to find a JMP ESP instruction, which will allow us to jump to our payload.
+
+Now 
