@@ -176,7 +176,11 @@ This code should trigger the vulnerability if you decide to set a breakpoint on 
 
 ### Infoleak to get the base address
 
-We can use the `NtQuerySystemInformation` function for a easy information leak, this will allow us to obtain the kernel base address from ntoskrnl, which will allow us to locate the HAL. Before we overwrite the HAL entry, we need to find where it is.
+#### Quick edit : hello from the future, I have written an extremly in-depth post about Windows information leaks, if you want to learn more about the upcoming one, refer to this post [https://fullpwnops.com/Windows-10-kaslr-infoleak/](https://fullpwnops.com/Windows-10-kaslr-infoleak/)
+
+We can use the `NtQuerySystemInformation` function for a easy information leak, this will allow us to obtain the kernel base address from ntoskrnl, which will allow us to calculate and locate the HAL. Before we overwrite the HAL entry, we need to find where it is.
+
+This information leak comes from the `NtQuerySystemInformation`, which is actually not the best method for information leaks on Windows, because it requires a medium integrity process. 
 
 ```c++
 __kernel_entry NTSTATUS NtQuerySystemInformation(
@@ -185,6 +189,16 @@ __kernel_entry NTSTATUS NtQuerySystemInformation(
   IN ULONG                    SystemInformationLength,
   OUT PULONG                  ReturnLength
 );
+```
+
+In order to fill out this function, we will need to dive back into the world of undocumented data structures on Windows, the first member structure is `SYSTEM_INFORMATION_CLASS`, the documentation comes from [https://www.geoffchappell.com/studies/windows/km/ntoskrnl/api/ex/sysinfo/class.htm](https://www.geoffchappell.com/studies/windows/km/ntoskrnl/api/ex/sysinfo/class.htm), and you can see the structure definition below.
+
+We can also refer to the sam-b github repository that gives a information leak POC.
+
+```c++
+typedef enum _SYSTEM_INFORMATION_CLASS {
+	SystemExtendedHandleInformation = 64
+} SYSTEM_INFORMATION_CLASS;
 ```
 
 ### Overwriting 0x4
