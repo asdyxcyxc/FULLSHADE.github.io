@@ -28,15 +28,15 @@ While auditing the source code for this application, you can see that the TRUN  
 
 Start running the vulnserver application, make sure your firewall is configured to allow this local connection. 
 
-![vulnserver 1]()
+![vulnserver 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver1.png)
 
 First a basic nc connection to the victim machine on port 9999 shows that Vulnserver is actively running.
 
-![vulnserver 2]()
+![vulnserver 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver2.png)
 
 Use Immunity debugger and attach the running vulnserver application to it, this will allow you to monitor and fully get a grasp on the application being exploited.
 
-![vulnserver 3]()
+![vulnserver 3](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver3.png)
 
 With the vulnserver application running on port 9999 on the victim host target, you can use a basic python socket connection in order to send data to this command.
 
@@ -59,7 +59,7 @@ expl.close()
 ```
 After you send the vulnerable application the buffer of A's, you can observe the application crashing. The overwritten registers show this is being successfully exploited.
 
-![vulnserver 4]()
+![vulnserver 4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver4.png)
 
 Now that we can confirm it is vulnerable to a classic EIP overwritten buffer overflow, we need to figure out exactly how big the buffer size is when we write data into the program, it crashes with 4000 bytes, but how big is the buffer? 
 
@@ -74,13 +74,13 @@ Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 
 Send this unqiue string to the application instead of all A's
 
-![vulnserver 5]()
+![vulnserver 5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver5.png)
 
 Now you can see the EIP register has been overwritten with 386F4337, this is a section of the unique pattern we sent, you can use the mona.py Immunity debugger extension as set up in the previous post (https://fullpwnops.com/immunity-windbg-mona/) to calculate this buffer size.
 
 Use the command `!mona findmsp` to have mona calculate exactly how much data it took to overwrite the EIP register.
 
-![vulnserver 6]()
+![vulnserver 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver6.png)
 
 Now we know it took exactly 2003 bytes to fill up the input buffer, so if we send 2007 bytes, the 4 bytes after the buffer are going to overwrite the EIP register.
 
