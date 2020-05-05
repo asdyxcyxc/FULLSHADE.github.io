@@ -9,7 +9,7 @@ This post covers the exploitation of a basic pool overflow vulnerability that re
 
 In kernel mode, for memory allocation there are memory pools, which is a kernel object that will allow memory blocks to be dynamically allocated when needed. The memory manager will create memory pools that the system and kernel-mode drivers can use to allocate memory. 
 
-There are two types of memory pools, nonpaged pools and paged pools. Both of these memory pool types are located in the address space region that is reserved for system memory allocation.
+There are two types of memory pools, `NonPaged pools` and `Paged pools`. Both of these memory pool types are located in the address space region that is reserved for system memory allocation.
 
 To learn more about kernel-mode memory pools you can refer to the previously written post linked below.
 
@@ -31,9 +31,9 @@ After Windows 7, the `NonPagedPoolNx` function was introduced to allow for the u
 
 Again, this exploit is on a Windows 7 system, so we won't need to go down the information leakage path just yet, that may come in a later post where I try to port this pool overflow exploits to Windows 10. More details on Windows 10 pool overflow exploitation and leakage may come at a later time.
 
-## HEVD - crash skeleton
+## HEVD - Skeleton crash
 
-## HEVD - pool grooming with event objects
+## HEVD - Pool grooming with event objects
 
 ## HEVD - Finalization and a shell
 
