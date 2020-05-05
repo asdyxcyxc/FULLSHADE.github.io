@@ -15,6 +15,10 @@ The classic exploitation technique for a standard buffer overflow is to fill up 
 
 ## Vulnserver source code audit
 
+Note: If you don't know what Immunity debugger is, check out the first post in this series, linked below. It will help you with setting up Immunity and the Mona.py extension which we will use in this post, it should take just a few minutes.
+
+- [https://fullpwnops.com/immunity-windbg-mona/](https://fullpwnops.com/immunity-windbg-mona/)
+
 While auditing the source code for this application, you can see that the TRUN  command takes user input using the insecure strncpy function, this allows for an attacker to abuse the applications buffer overflow vulnerability.
 
 ```c
