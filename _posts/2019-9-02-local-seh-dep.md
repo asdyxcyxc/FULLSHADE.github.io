@@ -25,8 +25,27 @@ ROP is a commonly used technique by attackers to attack mitigations like DEP, RO
 
 ROP attacks are built of what's called a ROP chain, a ROP chain is comprised of ROP gadgets, and each of these gadgets are memory addresses of code to call. 
 
-What's special about eat instruction, is that it's a series of instructions that end in a `RET` assesmbly instruction, so after executing the instruction, it will return to the next gadget.
+What's special about each instruction, is that it's a series of instructions that end in a `RET` assesmbly instruction, so after executing the instruction, it will return to the next gadget.
 
+```
++-------------------+
+|Instruction address|
+|RET                |
+|Instruction address|
+|RET                |
+|Instruction address|
+|RET                |
+|Instruction address|
+|RET                |
+|shellcode          |
++-------------------+
+```
+
+After each ROP gadet get's executed, it moves down the chain, and eventually the last RET will return to the first address of your shellcode payload.
+
+**Our ROP payload**
+
+We will be using a ROP payload which works to disable the DEP mitigation, and then we have it execute our shellcode.
 
 ## Generate ROP chains with Mona.py
 
