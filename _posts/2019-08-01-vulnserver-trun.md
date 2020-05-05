@@ -7,6 +7,10 @@ This post covers the beginning of any exploit developers' journey, the classic b
 
 This post covers the exploitation of the Vulnererver TRUN command, utilizing a JMP ESP and EIP overwrite to obtain remote code execution on a system.
 
+(Part 1 of my exploitation series, check out the full course linked below)
+
+- https://fullpwnops.com/windows-exploitation-pathway.html
+
 ## Introduction - what is a buffer overflow?
 
 So what exactly is a buffer overflow vulnerability? A buffer overflow vulnerability is a software programming error that occurs commonly in C, and c++  applications when the software author uses insecure functions.  A buffer overflow vulnerability is where an input function is not validating the amount of user input that is given, which will allow a user to give too much the data that can then overwrite the buffer sized amount that is designated for the input, and start writing data onto the stack.
