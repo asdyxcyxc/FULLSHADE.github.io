@@ -269,11 +269,6 @@ print("[!] You may need to send it multiple times")
 expl.close()
 ```
 
-After running our exploit, we can set a breakpoint on our JMP ESP, and step through our application, you can see it hitting the NOPSLED, which leads to our shellcode payload
-
-![vulnserver 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver8.png)
-
-
 ## Obtaining a reverse shell
 ----
 
