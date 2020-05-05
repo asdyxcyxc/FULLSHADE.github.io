@@ -30,3 +30,7 @@ And if the 20th bit is set to 0, SMEP is disabled and the access rights will dep
 “CR4.SMEP, SMEP-Enable Bit (bit 20 of CR4) — Enables supervisor-mode execution prevention (SMEP) when set. See Section 4.6, “Access Rights”.”
 
 The determination of access rights is split into either supervisor-mode access, or user-mode access, if the Current Privilege Level (CPL) is under 3 means it includes supervisor-mode access. And accesses that are CPL = 3 are user-mode accesses. The access rights depend on the value of SMEP (CR4.SMEP) as seen above. 
+
+## HEVD on Windows 8.1
+
+How exactly are we affected? Well, with the addition of SMEP now on our system, we need to add a new section to our HEVD kernel exploit, we need to create our ROP chain which will flip that CR4.SMEP bit. If we can acomplish that, we can get our normal exploitation going.
