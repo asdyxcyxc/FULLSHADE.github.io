@@ -14,16 +14,16 @@ The classic exploitation technique for a standard buffer overflow is to fill up 
 While auditing the source code for this application, you can see that the TRUN  command takes user input using the insecure strncpy function, this allows for an attacker to abuse the applications buffer overflow vulnerability.
 
 ```c
-			} else if (strncmp(RecvBuf, "TRUN ", 5) == 0) {
-				char *TrunBuf = malloc(3000);
-				memset(TrunBuf, 0, 3000);
-				for (i = 5; i < RecvBufLen; i++) {
-					if ((char)RecvBuf[i] == '.') {
-						strncpy(TrunBuf, RecvBuf, 3000);			// <------------	
-						Function3(TrunBuf);
-						break;
-					}
-				}
+	} else if (strncmp(RecvBuf, "TRUN ", 5) == 0) {
+		char *TrunBuf = malloc(3000);
+		memset(TrunBuf, 0, 3000);
+		for (i = 5; i < RecvBufLen; i++) {
+			if ((char)RecvBuf[i] == '.') {
+				strncpy(TrunBuf, RecvBuf, 3000); // <------------	
+				Function3(TrunBuf);
+				break;
+			}
+		}
 ```
 
 Start running the vulnserver application, make sure your firewall is configured to allow this local connection. 
