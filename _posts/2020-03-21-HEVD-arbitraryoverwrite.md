@@ -176,7 +176,9 @@ This code should trigger the vulnerability if you decide to set a breakpoint on 
 
 ### Infoleak to get the base address
 
-#### Quick edit : hello from the future, I have written an extremly in-depth post about Windows information leaks, if you want to learn more about the upcoming one, refer to this post [https://fullpwnops.com/Windows-10-kaslr-infoleak/](https://fullpwnops.com/Windows-10-kaslr-infoleak/)
+In order to locate the HAL before overwriting it, we need to locate it, and in order to do that we would need obtain the base address of the kernel, and in order to do that we need to utilize a few undocumented aspects of the kernel, and we also need an info leak to bypass KASLR.
+
+### Quick edit : hello from the future, I have written an extremly in-depth post about Windows information leaks, if you want to learn more about the upcoming one, refer to this post [https://fullpwnops.com/Windows-10-kaslr-infoleak/](https://fullpwnops.com/Windows-10-kaslr-infoleak/)
 
 We can use the `NtQuerySystemInformation` function for a easy information leak, this will allow us to obtain the kernel base address from ntoskrnl, which will allow us to calculate and locate the HAL. Before we overwrite the HAL entry, we need to find where it is.
 
