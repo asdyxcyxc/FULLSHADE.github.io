@@ -30,3 +30,5 @@ This driver's vulnerability allows for a user buffer that's a located in a nonpa
 ## HEVD - pool grooming with event objects
 
 ## HEVD - Finalization and a shell
+
+## Microsofts mitigation
