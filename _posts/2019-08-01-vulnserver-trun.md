@@ -128,7 +128,7 @@ Now that we can control what address get's executed next, we want to find a JMP 
 
 We can use the command `!mona jmp -r esp` to locate JMP ESP instructions in the application, if there is no JMP ESP, a CALL ESP instruction works just as well.
 
-![vulnserver 7](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver7.png)
+![vulnserver 8](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/vulnserver/vulnserver8.png)
 
 Now instead of 4 B's, we want to use one of the JMP ESP's addresses instead.
 
