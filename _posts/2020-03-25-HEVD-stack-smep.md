@@ -22,11 +22,12 @@ In the Intel manual in May of 2011, SMEP was documented in manual 3A, sections 2
 
 Intel’s control register CR4 includes 31 bits, bit 20 is the CR4.SMEP bit. This bit state can be set to either 1 or 0 in a binary like fashion. Where if CR4.SMEP holds a value of 1, CPU instructions may not be fetched from any user-mode process or any address that is running is user-mode. 
 
-![smep 1]()
+![smep 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/smep/smep1.png)
 
 This is the security mitigation in play, where if SMEP is enabled (and it is implemented and enabled by default on Windows 8+ systems as mentioned above) it will stop attackers from being able to execute exploits which rely on usermode shellcode (commonly within privilege escalation kernel attacks, attacker will prepare and have usermode based shellcode executed from a rin0 privileged point of view, giving them SYSTEM access, this is where attackers have kernel drivers, or the kernel system redirect execution to a user mode prepared shellcode) 
 
 And if the 20th bit is set to 0, SMEP is disabled and the access rights will depend on the paging mode and the value of IA32_EFER.NXE. For 32-bit paging, if IA32_EFER.NXE = 0, instructions may be fetched from any user-mode address. (SMEP disabled.
+
 “CR4.SMEP, SMEP-Enable Bit (bit 20 of CR4) — Enables supervisor-mode execution prevention (SMEP) when set. See Section 4.6, “Access Rights”.”
 
 The determination of access rights is split into either supervisor-mode access, or user-mode access, if the Current Privilege Level (CPL) is under 3 means it includes supervisor-mode access. And accesses that are CPL = 3 are user-mode accesses. The access rights depend on the value of SMEP (CR4.SMEP) as seen above. 
