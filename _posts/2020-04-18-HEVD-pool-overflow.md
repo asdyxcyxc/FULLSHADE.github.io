@@ -25,6 +25,12 @@ This driver's vulnerability allows for a user buffer that's a located in a nonpa
 
 ## Windows 7's executable pools
 
+Since this exploitation is taking place on a Windows 7 system, the `NonPagedPool` functions are in play when it comes to kernel pool memory usage, which means that pools are executable, which makes pool overflow exploitation a whole lot easier. 
+
+After Windows 7, the `NonPagedPoolNx` function was introduced to allow for the usage of pools that are marked as non-executable, this new function basically allows for pools to have NX enabled. And Windows will use it by default now, meaning, if your writing a pool overflow exploit on a Windows 10 system, you would need an information leakage 
+
+Again, this exploit is on a Windows 7 system, so we won't need to go down the information leakage path just yet, that may come in a later post where I try to port this pool overflow exploits to Windows 10. More details on Windows 10 pool overflow exploitation and leakage may come at a later time.
+
 ## HEVD - crash skeleton
 
 ## HEVD - pool grooming with event objects
