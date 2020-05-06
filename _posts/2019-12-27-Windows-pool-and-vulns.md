@@ -71,9 +71,13 @@ Pool corruption/pool overflows usually occur when a Kernel driver suffers from s
 
 Since pools are in kernel-mode and are designed as memory for Kernel drivers/devices, attacks against the pools are going to result in BSOD and EOP privilege escalation attacks and exploits. Just like any other type of memory exploitation, there are also going to be pool corruption vulnerabilities and DOS crashes occurring, an attacker's goal with Windows Kernel pool exploitation is creating an exploit which results in an EOP attack.
 
-Some of the attacks are `ListEntry Flink Overwrites` , `PoolIndex Overwrites`, and the traditional `ListEntry Attacks`. These are all methods of Windows pool exploitation.
-
 A common method for payload delivery while conducting Windows Kernel pool overflow attacks is called `Pool Feng-Shui` which essentially 
+
+On a Windows 7 system, the NonPagedPool functions are in play when it comes to kernel pool memory usage, which means that pools are executable, which makes pool overflow exploitation a whole lot easier.
+
+After Windows 7, the `NonPagedPoolNx` function was introduced to allow for the usage of pools that are marked as non-executable, this new function basically allows for pools to have NX enabled. And Windows will use it by default now, meaning, if your writing a pool overflow exploit on a Windows 10 system, you would need an information leakage
+
+With pool feng shui you need to spray objects into the kernel pool, through a series of allocations and deallocations, you can put the pool in a deterministic state, where you can create holes in it, and drop your shellcode around.
 
 ----
 
