@@ -59,7 +59,7 @@ Include this string in your exploit, and run it all through Immunity again, when
 
 ![local seh 6](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh6.png)
 
-In order to actually exploit this, you need to obtain a POP POP RET  gadget, this can be done with MONA.py  via the !seh -n  command. The POP POP RET sequence will be overwriting the NSEH (next structured exception handler in the SEH chain)
+In order to actually exploit this, you need to obtain a POP POP RET  gadget, this can be done with MONA.py  via the !seh -n  command. The POP POP RET sequence will be overwriting the SEH (structured exception handler in the SEH chain)
 
 Running this command will search through the program for the needed sequence, this POPPOPRET sequence will return execution flow back to the structured exception Handler, the goal is to overwrite both the exception Handler and the next structured exception Handler. 
 
