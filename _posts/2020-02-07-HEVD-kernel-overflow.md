@@ -146,4 +146,4 @@ Returning the id of our payload is required as a parameter for the `DeviceIoCont
 
 ## Conclusion
 
-Conclusively, in this post we covered the basic exploitation of a standard stack-based buffer overflow that resides in a third-party kernel driver.  Utilizing some basic input output functions that allows us to communicate and send data to the driver, we had the ability to send data that crashed the application, and then we utilize a token stealing shellcode payload, that Traverse the EPROCESS  data structure to obtain a system level access token,  while using that stolen token to spawn a new system level shell.
+Conclusively, in this post we covered the basic exploitation of a standard stack-based buffer overflow that resides in a third-party kernel driver. Utilizing some basic input output functions that allows us to communicate and send data to the driver, we had the ability to send data that crashed the application, and then we utilize a token stealing shellcode payload, that traversed the EPROCESS data structure to obtain a system level access token, while using that stolen token to spawn a new system level shell.
