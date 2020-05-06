@@ -15,6 +15,23 @@ Also, we are going to work to replicate crashes, rightful exploits, and learn so
 
 This post will assume that you have already completed the majority of my other posts, and or ready come from a vulnerability researcher background with experience developing exploits and you just want to learn some new fuzzing techniques.
 
+## Finding software + drivers to fuzz
+
+For the means of discovering new vulnerabilities, and or your first 0 day in third-party kernel driver.  Utilizing the softpedia website will allow you to find applications and software that can include third-party drivers.  It's important to note that driver  Developers are fairly rare, so a lot of times applications are just copying and pasting code, which is one of the reasons why there's so many vulnerabilities in third-party drivers. 
+
+When searching softpedia (or any site like it), filter by, and search for applications that include features such as graphics card settings, rootkit scanners, malware antivirus scanners, printer software, and any sort of user mode application that would communicate with some hardware aspect of your computer. These applications are likely to include if not many third-party drivers. 
+
+Once you find a Target application,  you can use the DriverView application to see any newly installed drivers on your system.
+
+- [https://www.nirsoft.net/utils/driverview.html](https://www.nirsoft.net/utils/driverview.html)
+
+![fuzz 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/fuzzing-drivers/fuzz2.png)
+
+Listed above shows what DriverView looks like.
+
+But make sure to sort by hiding microsoft drivers, since you only want to target third-party installed ones (at this point in time)
+
+
 ## Tools for fuzzing
 
 The majority of our vulnerability discovery will come from generating random input and sending it to IOCTLs via kernel driver communication.  This type of fuzzing will allow us to discover easy to reverse, and easy to exploit vulnerabilities in applications. 
