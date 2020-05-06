@@ -80,6 +80,22 @@ A NOPSELD is a short payload that is comprised of NOP  assembly instructions, th
 
 Including the NOPSLED  after our short jump, will allow for a clean Shell Code execution, where our short jump will directly hit our shellcode without any errors, sometimes an application may have slight adjustments, so you want to compensate for anything by including a large area for the short jump to land in.
 
+```
++----------------------+
+| Filled input buffer  |
+| ↓                    |
+| Short JMP            |
+| ↓                    |
+| POP-POP-RET          |
+| ↓                    |
+| NOPSLED              |
+| ↓                    |
+| Shellcode payload    |
++----------------------+
+```
+
+Our final payload is as seen below.
+
 ```python
 from struct import *
 
