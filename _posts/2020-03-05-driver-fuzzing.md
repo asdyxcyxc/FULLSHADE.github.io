@@ -40,6 +40,8 @@ The majority of our vulnerability discovery will come from generating random inp
 
 **ioctlfuzzer1.3**
 
+- [https://code.google.com/archive/p/ioctlfuzzer/](https://code.google.com/archive/p/ioctlfuzzer/)
+
 The first fuzzer I will utilize after downloading an application with drivers, is ioctlfuzzer1.3,  this father allows you to mass discover and mass fuzz any IRP requests that are being sent throughout the io of the system.  this Falls are usually allows  for quick and easy vulnerability discovery, usually within 10 to 15 seconds of unleashing this fuzzer upon an applications kernel drivers.
 
 This fuzzer allows you to configure which drivers and IOCTLs  you want to focus on, an  insert of a common configuration that can be used to discover driver can be seen below. When setting the configuration XML file, you need to specify and create a section for allowed drivers.
