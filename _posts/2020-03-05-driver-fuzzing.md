@@ -21,6 +21,8 @@ For the means of discovering new vulnerabilities, and or your first 0 day in thi
 
 When searching softpedia (or any site like it), filter by, and search for applications that include features such as graphics card settings, rootkit scanners, malware antivirus scanners, printer software, and any sort of user mode application that would communicate with some hardware aspect of your computer. These applications are likely to include if not many third-party drivers. 
 
+- [https://win.softpedia.com/](https://win.softpedia.com/)
+
 Once you find a Target application,  you can use the DriverView application to see any newly installed drivers on your system.
 
 - [https://www.nirsoft.net/utils/driverview.html](https://www.nirsoft.net/utils/driverview.html)
