@@ -116,3 +116,7 @@ Once this is set up you start the host debugger machine first, and set the kerne
 Now you can see your victim machine connects to the host WinDBG machine, and your kernel debugging envrioment is set up.
 
 ![final image](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/setupdebug/setupdebug4.png)
+
+## Conclusion
+
+Conclusively,  in this post you learned how to implement the mona.py  extension in both immunity debugger and WinDBG.  We  also covered how to set up a basic kernel debugging environment using virtualbox via named pipe Serial ports.
