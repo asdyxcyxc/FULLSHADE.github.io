@@ -5,13 +5,13 @@ title: Local SEH overflow - exploitation of Millenium MP3 Studio 2.0 with a calc
 
 The victim program for this walkthrough is `Millenium MP3 Studio 2.0`, it includes a local SEH based buffer overflow when opening certain sized files with specific file extensions.
 
-Start by attaching an immunity debugger to the running MP3 Studio process.
+Start by attaching an immunity debugger to the running MP3 Studio process. This will allow us to set breakpoints, and get a better understanding of how the application runs when we start to exploit it. 
 
 ![local seh 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh1.png)
 
 The basic concept for exploiting a local Structured Exception Handler based buffer overflow, is that you will create a malicious text file that includes the payload that you are going to manually enter into a vulnerable input field, or instead of a text file, you will generate a malicious payload embedded within something other than a text file, for example, this target application includes a buffer overflow when parsing certain types of data files, with a .mpf file extension, we will generate our malicious payload.
 
-We can start the exploitation process by creating a basic python script that opens up a new file and inputs a large buffer of data into it.
+We can start the exploitation process by creating a basic python script that opens up a new file and inputs a large buffer of data into it. 10000 A's  is enough data to overwrite the user input buffer, and two write the excess data onto the applications memory stack, doing so will trigger the buffer overflow vulnerability.
 
 ```python
 from struct import *
@@ -31,7 +31,7 @@ except:
     print("[!] Error creating the exploit")
 ```
 
-After running the newly-created script, you can now open this malicious .mpf  File in the MP3 Studio application, while the MP3 Studio application is still attached to immunity to bugger. Now you should be able to witness the buffer overflow vulnerability Being triggered, and you should experience an exception crash.
+After running the newly-created script, you can now open this malicious .mpf  File in the MP3 Studio application, while the MP3 Studio application is still attached to immunity immunity. Now you should be able to witness the buffer overflow vulnerability being triggered, and you should experience an exception crash within the application.
 
 ![local seh 2](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh2.png)
 
@@ -65,12 +65,20 @@ Running this command will search through the program for the needed sequence, th
 
 ![local seh 4](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/localseh/localseh4.png)
 
-And the next structured exception Handler will be overwritten with this sequence that we discover, returning normal flow back to the user-controlled structured exception Handler.
+And the structured exception Handler will be overwritten with this sequence that we discover, returning normal flow back to the user-controlled structured exception Handler.
 
-Which you can then add a short jump over the next structure exception Handler, which then jumps into a NOP sled and to your final shellcode payload
+As for the next structured exception Handler, you want to overwrite it with a short jump sequence, this can be denoted with the assembly opcodes 90 90 32 EB , In a reversed format to compensate for the little endian format that we need the memory addresses to be in.  Overriding the next structure exception Handler with this short jump, will allow for the execution flow to jump over the structured exception Handler. and the short jump will drop us into our NOPSLED.
+
+```python
+seh = pack ('<I',  0x10014E98) # POP POP RET from xaudio.dll - using !mona seh -n
+nseh = pack ('<I', 0x909032EB) # Short jump over the POPPOPRET filled NSEH
+```
 
 Run these new addresses through struct.pack in order to arrange them properly with little endian format.
 
+A NOPSELD is a short payload that is comprised of NOP  assembly instructions, these NOP  instructions do absolutely nothing, they can be used as a sort of Landing Zone padding for our jump. Including 10-15 NOPs as padding is usually enough.
+
+Including the NOPSLED  after our short jump, will allow for a clean Shell Code execution, where our short jump will directly hit our shellcode without any errors, sometimes an application may have slight adjustments, so you want to compensate for anything by including a large area for the short jump to land in.
 
 ```python
 from struct import *
