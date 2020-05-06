@@ -45,6 +45,13 @@ After you obtain a crash from fuzzing, you need to load the driver up in Ida Pro
 
 - https://github.com/FSecureLABS/win_driver_plugin
 
+**Driver buddy**
+
+Another IOCTL  Discovery Ida Pro plugin is  the driver buddy plug-in. This plug-in allows you to easily scan a driver for dispatch function, and any ICOTLs  that may reside throughout the driver.
+
+- https://github.com/nccgroup/DriverBuddy
+
+
 **Practical - demonstration time**
 
 Now that we've discovered a crash in the previously noted driver, let's load it up into Ida Pro and discover exactly why it crashed. 
