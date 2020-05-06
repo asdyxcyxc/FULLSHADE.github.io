@@ -25,6 +25,30 @@ The first fuzzer I will utilize after downloading an application with drivers, i
 
 This fuzzer allows you to configure which drivers and IOCTLs  you want to focus on, an  insert of a common configuration that can be used to discover driver can be seen below. When setting the configuration XML file, you need to specify and create a section for allowed drivers.
 
+```xml
+  <!--
+      IOCTLs "allow" list.
+   
+      The fuzzer will process (i.e. log and/or fuzz) any IOCTL request 
+      containing at least one parameter from the <allow> list.
+   
+      If the list is empty, each IRP will be processed.
+  --> 
+
+  <allow>
+    <driver val="example.sys" />
+    <driver val="example.sys" />
+    <driver val="example.sys" />
+    <driver val="example.sys" />
+    <driver val="example.sys" />
+  </allow>
+```
+Once your fuzzing victim machine is attached to a host debugger, you can now unleash this fuzzer with any victim drivers you want to target. 
+
+**Important** the entire point of using this fuzzer is to mass fuzz an applications installed drivers, make sure you use and configure the config xml file. 
+
+![fuzz 1](https://raw.githubusercontent.com/FULLSHADE/FULLSHADE.github.io/master/static/img/_posts/fuzzing-drivers/fuzz1.png)
+
 **IOCTLbf**
 - https://github.com/koutto/ioctlbf
 
@@ -33,7 +57,6 @@ IOCTLbf is a fairly lightweight and simple fuzzer, this mainly relies on the fac
 **Practical - demonstration time**
 
 Now that we know which fuzzers we can use to easily discover vulnerabilities in a driver, here's a demonstration.
-
 
 ## Reverse engineering with IDA
 
